@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
-<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--%>
     <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -44,18 +43,17 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach item = "${products}" var= "p">
+    <c:forEach items = "${products}" var= "p">
         <tr>
             <td>${p.getId()}</td>
             <td>${p.getProductName()}</td>
-            <td>${p.getPrice()}</td>
+            <td> <fmt:formatNumber value = "${p.getPrice()}"/> </td>
             <td>${p.getDescription()}</td>
             <td>${p.getStock()}</td>
-            <td>${p.getStatus() ? "Con hang" : "Het hang"} </td>
+            <td>${p.isStatus() ? "Con hang" : "Het hang"} </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>--%>
 </body>
 </html>

@@ -5,9 +5,6 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello cac ban!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Gioi thieu ban than</a>
+<a href="servlet">Xem danh sach san pham</a>
 </body>
 </html>

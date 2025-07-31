@@ -18,16 +18,15 @@ public class Servlet extends HttpServlet {
         Product product = new Product();
         int id = Integer.parseInt(req.getParameter("id"));
         product.setId(id);
-        String productName = req.getParameter("productName");
+        String productName = req.getParameter("name");
         product.setProductName(productName);
         double productPrice = Double.parseDouble(req.getParameter("price"));
         product.setPrice(productPrice);
-        int stock = Integer.parseInt(req.getParameter("stock"));
+        int stock = Integer.parseInt(req.getParameter("quantity"));
         product.setStock(stock);
-        String description = req.getParameter("description");
+        String description = req.getParameter("desc");
         product.setDescription(description);
-        boolean status = Boolean.parseBoolean(req.getParameter("status"));
-        product.setStatus(status);
+        product.setStatus(true);
         products.add(product);
 
         req.setAttribute("products", products);
