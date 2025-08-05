@@ -27,6 +27,13 @@
             margin-bottom: 25px;
         }
         p{margin:8px 0;}
+
+        .schedule {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
         .schedule a {
             display:inline-block;
             padding:8px 14px;
@@ -36,6 +43,7 @@
             border-radius:4px;
             text-decoration:none;
         }
+
         .back {
             display:block;
             text-align:center;
