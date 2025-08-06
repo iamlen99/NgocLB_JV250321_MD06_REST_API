@@ -23,7 +23,7 @@
         }
 
         table {
-            width: 90%;
+            width: 70%;
             margin: auto;
             border-collapse: collapse;
             background-color: #fff;
@@ -72,14 +72,16 @@
 <table>
     <thead>
     <tr>
+        <th>STT</th>
         <th>Tên</th>
         <th>Email</th>
         <th>Vị trí</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="emp" items="${employees}">
+    <c:forEach var="emp" items="${employees}" varStatus="loop">
         <tr>
+            <td>${loop.index + 1}</td>
             <td>${emp.name}</td>
             <td>${emp.email}</td>
             <td>${emp.position}</td>
