@@ -1,4 +1,4 @@
-package ra.exercise.config;
+package ra.exercise;
 
 public class User {
     private String username;
