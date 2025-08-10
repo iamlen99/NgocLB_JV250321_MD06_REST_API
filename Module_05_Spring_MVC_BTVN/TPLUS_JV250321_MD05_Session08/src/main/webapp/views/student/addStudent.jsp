@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ngoclb
-  Date: 8/7/25
-  Time: 3:43 PM
+  Date: 8/10/25
+  Time: 11:35 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Thêm Phim</title>
+    <title>Title</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,44 +68,27 @@
     </style>
 </head>
 <body>
-<h2>➕ Thêm mới phim</h2>
+<h2>➕ Thêm mới sinh viên</h2>
 
 <c:if test="${not empty error}">
     <p class="error">${error}</p>
 </c:if>
 
-<form:form modelAttribute="movie" method="post" action="/addMovie" enctype="multipart/form-data">
-    <label>Tiêu đề:</label>
-    <form:input path="title"/>
-    <form:errors path="title" cssClass="error"/>
+<form:form modelAttribute="student" method="post" action="addStudent">
+    <label>Tên sinh viên:</label>
+    <form:input path="name"/>
+    <form:errors path="name" cssClass="error"/>
 
-    <label>Đạo diễn:</label>
-    <form:input path="director"/>
-    <form:errors path="director" cssClass="error"/>
+    <label>Email:</label>
+    <form:input path="email"/>
+    <form:errors path="email" cssClass="error"/>
 
-    <label>Ngày phát hành:</label>
-    <form:input path="releaseDate" type="date"/>
-    <form:errors path="releaseDate" cssClass="error"/>
-
-    <label>Thể loại:</label>
-    <form:input path="genre"/>
-    <form:errors path="genre" cssClass="error"/>
-
-    <label>Poster:
-        <input type="file" name="file"/>
-        <c:if test="${not empty posterError}">
-            <p class="error">${posterError}</p>
-        </c:if>
-        <c:if test="${not empty uploadError}">
-            <p class="error">${uploadError}</p>
-        </c:if>
-    </label>
-
-    <button type="submit">Thêm phim</button>
-    <button type="button" onclick="window.location.href='movieController'">Quay lại</button>
+    <label>Ngày sinh:</label>
+    <form:input path="dob" type="date"/>
+    <form:errors path="dob" cssClass="error"/>
+    <br>
+    <button type="submit">Thêm sinh viên</button>
+    <button type="button" onclick="window.location.href='/studentController'">Quay lại</button>
 </form:form>
 </body>
 </html>
-
-
-
