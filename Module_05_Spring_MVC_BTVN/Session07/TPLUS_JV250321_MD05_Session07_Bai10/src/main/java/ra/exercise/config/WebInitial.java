@@ -5,8 +5,7 @@ import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInitial extends AbstractAnnotationConfigDispatcherServletInitializer {
-    private String TMP_PATH = System.getProperty("java.io.tmpdir");
-    private Long MAX_FILE_SIZE = 50 * 1024 * 1024L; //50MB
+    private final String TMP_PATH = System.getProperty("java.io.tmpdir");
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -26,6 +25,8 @@ public class WebInitial extends AbstractAnnotationConfigDispatcherServletInitial
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         super.customizeRegistration(registration);
+        //50MB
+        long MAX_FILE_SIZE = 50 * 1024 * 1024L;
         registration.setMultipartConfig(new MultipartConfigElement(TMP_PATH, MAX_FILE_SIZE, 4 * MAX_FILE_SIZE, 50 * 1024 * 1024));
     }
 }

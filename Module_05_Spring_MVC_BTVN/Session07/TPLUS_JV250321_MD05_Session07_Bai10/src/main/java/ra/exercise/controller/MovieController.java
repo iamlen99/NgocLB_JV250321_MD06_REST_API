@@ -37,7 +37,7 @@ public class MovieController {
     }
 
     @PostMapping("/addMovie")
-    public String addMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("file") MultipartFile file, BindingResult bindingResult, Model model) {
+    public String addMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
         if (bindingResult.hasErrors()) {
             return "addMovie";
         }
@@ -55,7 +55,7 @@ public class MovieController {
             return "addMovie";
         }
 
-        if(movieService.addMovie(movie)) {
+        if (movieService.addMovie(movie)) {
             model.addAttribute("movies", movieService.getAllMovies());
             model.addAttribute("message", "Them phim thanh cong");
             return "movieList";
@@ -76,7 +76,7 @@ public class MovieController {
     }
 
     @PostMapping("/updateMovie")
-    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("file") MultipartFile file, BindingResult bindingResult,  Model model) {
+    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
         if (bindingResult.hasErrors()) {
             return "updateMovie";
         }
@@ -91,7 +91,7 @@ public class MovieController {
             }
         }
 
-        if(movieService.updateMovie(movie)) {
+        if (movieService.updateMovie(movie)) {
             model.addAttribute("movies", movieService.getAllMovies());
             model.addAttribute("message", "Sua phim thanh cong");
             return "movieList";
@@ -101,8 +101,8 @@ public class MovieController {
     }
 
     @GetMapping("/deleteMovie")
-    public String deleteMovie( @RequestParam("id") Integer id,  Model model) {
-        if(movieService.deleteMovie(id)) {
+    public String deleteMovie(@RequestParam("id") Integer id, Model model) {
+        if (movieService.deleteMovie(id)) {
             model.addAttribute("movies", movieService.getAllMovies());
             model.addAttribute("message", "Xoa phim thanh cong");
         } else {
