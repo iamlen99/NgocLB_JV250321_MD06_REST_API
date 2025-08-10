@@ -1,5 +1,6 @@
 package ra.exercise.model.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import ra.exercise.model.entity.Movie;
 
 import java.util.List;

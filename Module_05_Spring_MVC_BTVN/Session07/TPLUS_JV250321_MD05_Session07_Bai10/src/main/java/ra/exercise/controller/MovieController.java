@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ra.exercise.model.entity.Movie;
 import ra.exercise.model.service.MovieService;
+import ra.exercise.strorage.CloudinaryService;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -16,6 +19,10 @@ import java.util.Optional;
 public class MovieController {
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
 
     @GetMapping
     public String showMovie(Model model) {
@@ -30,10 +37,24 @@ public class MovieController {
     }
 
     @PostMapping("/addMovie")
-    public String addMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult,  Model model) {
+    public String addMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("file") MultipartFile file, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "addMovie";
         }
+
+        if (file == null || file.isEmpty()) {
+            model.addAttribute("posterError", "Chưa upload file hoặc file trống");
+            return "addMovie";
+        }
+
+        try {
+            String imgUrl = cloudinaryService.uploadImage(file);
+            movie.setPoster(imgUrl);
+        } catch (IOException e) {
+            model.addAttribute("uploadError", "Lỗi upload file" + e.getMessage());
+            return "addMovie";
+        }
+
         if(movieService.addMovie(movie)) {
             model.addAttribute("movies", movieService.getAllMovies());
             model.addAttribute("message", "Them phim thanh cong");
@@ -55,10 +76,21 @@ public class MovieController {
     }
 
     @PostMapping("/updateMovie")
-    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult,  Model model) {
+    public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("file") MultipartFile file, BindingResult bindingResult,  Model model) {
         if (bindingResult.hasErrors()) {
             return "updateMovie";
         }
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                String imgUrl = cloudinaryService.uploadImage(file);
+                movie.setPoster(imgUrl);
+            } catch (IOException e) {
+                model.addAttribute("uploadError", "Lỗi upload file" + e.getMessage());
+                return "updateMovie";
+            }
+        }
+
         if(movieService.updateMovie(movie)) {
             model.addAttribute("movies", movieService.getAllMovies());
             model.addAttribute("message", "Sua phim thanh cong");

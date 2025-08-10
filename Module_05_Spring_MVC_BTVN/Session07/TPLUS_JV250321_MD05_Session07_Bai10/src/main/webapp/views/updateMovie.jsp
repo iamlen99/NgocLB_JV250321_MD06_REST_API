@@ -29,7 +29,7 @@
             background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
         }
 
         label {
@@ -74,7 +74,7 @@
     <p class="error">${error}</p>
 </c:if>
 
-<form:form modelAttribute="movie" method="post" action="/updateMovie">
+<form:form modelAttribute="movie" method="post" action="/updateMovie" enctype="multipart/form-data">
     <form:hidden path="id"/>
 
     <label>Tiêu đề:</label>
@@ -93,11 +93,18 @@
     <form:input path="genre"/>
     <form:errors path="genre" cssClass="error"/>
 
-    <label>Poster (URL):</label>
-    <form:input path="poster"/>
-    <form:errors path="poster" cssClass="error"/>
+    <label>Poster:
+        <input type="file" name="file"/>
+        <c:if test="${not empty posterError}">
+            <p class="error">${posterError}</p>
+        </c:if>
+        <c:if test="${not empty uploadError}">
+            <p class="error">${uploadError}</p>
+        </c:if>
+    </label>
 
     <button type="submit">Cập nhật phim</button>
+    <button type="button" onclick="window.location.href='movieController'">Quay lại</button>
 </form:form>
 </body>
 </html>

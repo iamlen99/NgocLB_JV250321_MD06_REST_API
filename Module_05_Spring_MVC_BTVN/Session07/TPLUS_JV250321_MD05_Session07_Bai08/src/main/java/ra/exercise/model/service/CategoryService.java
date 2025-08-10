@@ -9,10 +9,4 @@ public interface CategoryService {
     List<Category> getAllCategories();
 
     boolean addCategory(Category category);
-
-    boolean updateCategory(Category category);
-
-    boolean deleteCategory(int id);
-
-    Optional<Category> getCategory(int id);
 }

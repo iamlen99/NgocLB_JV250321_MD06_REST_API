@@ -2,15 +2,18 @@ package ra.exercise.model.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ra.exercise.model.entity.Movie;
 import ra.exercise.model.repository.MovieRepository;
 import ra.exercise.model.service.MovieService;
+import ra.exercise.strorage.CloudinaryService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
+
     @Autowired
     private MovieRepository movieRepository;
 
@@ -38,4 +41,5 @@ public class MovieServiceImpl implements MovieService {
     public Optional<Movie> getMovie(Integer id) {
         return movieRepository.findById(id);
     }
+
 }

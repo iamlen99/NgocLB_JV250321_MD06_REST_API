@@ -31,17 +31,18 @@ dependencies {
 
     // https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
     implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2")
-// https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
-    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.1")
-
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
-    implementation("org.hibernate:hibernate-validator:8.0.2.Final")
 
     // https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
 
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+    implementation("org.hibernate:hibernate-validator:8.0.2.Final")
+
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation("mysql:mysql-connector-java:8.0.28")
+
+    // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
+    implementation("com.cloudinary:cloudinary-http44:1.32.2")
 }
 
 test {

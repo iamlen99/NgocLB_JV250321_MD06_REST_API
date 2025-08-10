@@ -26,7 +26,6 @@ public class Movie {
     @Size(max = 30, message = "Ten the loai phim co do dai toi da 30 ky tu")
     private String genre;
 
-    @NotBlank(message = "Poster khong duoc de trong")
     private String poster;
 
     public Movie(Integer id, String title, String director, LocalDate releaseDate, String genre, String poster) {

@@ -9,11 +9,4 @@ public interface CategoryRepository {
     List<Category> findAll();
 
     boolean save (Category category);
-
-    boolean update (Category category);
-
-    boolean delete (int id);
-
-    Optional<Category> findById (int id);
-
 }
