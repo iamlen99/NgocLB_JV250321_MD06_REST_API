@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<!-- Header -->
+<div th:fragment="~{fragments::header}">
+    <header style="background-color: #f0f0f0; padding: 10px;">
+        <h1>My Website</h1>
+        <nav>
+            <a th:href="@{/homeController}">Home</a>
+            <a th:href="@{/homeController/about}">About</a>
+            <a th:href="@{/homeController/contact}">Contact</a>
+        </nav>
+    </header>
+</div>
+
+<!-- Footer -->
+<div th:fragment="~{fragments::footer}">
+    <footer style="background-color: #ddd; padding: 10px; text-align:center;">
+        <p>© 2025 - Ngoc of Website</p>
+    </footer>
+</div>
+</body>
+</html>

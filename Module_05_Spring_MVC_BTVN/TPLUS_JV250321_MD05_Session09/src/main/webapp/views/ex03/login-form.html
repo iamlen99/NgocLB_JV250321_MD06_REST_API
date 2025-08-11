@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<h2>Login</h2>
+<p th:if="${error}" th:text="${error}" style="color: red"></p>
+<form th:action="@{/userControllerEx03/logging}" method="post" th:object="${user}">
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" th:field="*{userName}" /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}" /></td>
+        </tr>
+    </table>
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>

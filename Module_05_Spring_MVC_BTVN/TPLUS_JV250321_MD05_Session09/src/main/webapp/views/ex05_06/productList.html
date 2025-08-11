@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img {
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<h1>Product List</h1>
+<form th:action="@{/productController}" method="get" style="margin-bottom: 10px">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Search name or ID">
+    <button type="submit">Search</button>
+</form>
+
+<a th:href="@{/productController/cart}">Go to Cart</a>
+<table border="1" cellpadding="8" style="margin-top: 10px">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="pr:${productList}">
+        <td th:text="${pr.id}"></td>
+        <td th:text="${pr.name}"></td>
+        <td th:text="${pr.price}"></td>
+        <td th:text="${pr.description}"></td>
+        <td>
+            <img th:src="${pr.image}"/>
+        </td>
+        <td th:text="${pr.quantity}"></td>
+        <td>
+            <a th:href="@{/productController/add-to-cart/{id}(id=${pr.id})}">Add to Cart</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

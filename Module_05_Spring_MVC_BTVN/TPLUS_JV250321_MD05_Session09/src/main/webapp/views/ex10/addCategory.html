@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+        .form-container {
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 8px 0 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 th:text="#{add_category}">Thêm Mới Danh Mục</h2>
+    <p th:if="${error}" th:text="${error}" style="color: red"></p>
+
+    <form th:action="@{/categoryController/addCategory}" method="post">
+        <label for="categoryNameVi">Tên Danh Mục:</label>
+        <input type="text" id="categoryNameVi" name="categoryNameVi" required>
+
+        <label for="categoryNameEn">Category Name:</label>
+        <input type="text" id="categoryNameEn" name="categoryNameEn" required>
+
+        <label for="descriptionVi">Mô Tả:</label>
+        <textarea id="descriptionVi" name="descriptionVi"></textarea>
+
+        <label for="descriptionEn">Description:</label>
+        <textarea id="descriptionEn" name="descriptionEn"></textarea>
+
+        <button type="submit" th:text="#{add}">Thêm</button>
+    </form>
+</div>
+</body>
+</html>

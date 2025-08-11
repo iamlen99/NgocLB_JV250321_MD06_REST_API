@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Edit Transaction</title>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Transaction</h1>
+    <form th:action="@{/transactionController/edit/{id}(id=${transaction.id})}" th:object="${transaction}" method="post">
+        <label for="id" class="label">ID</label>
+        <input type="number" id="id" th:field="*{id}" class="input" readonly>
+
+        <label for="description" class="label">Description</label>
+        <input type="text" id="description" th:field="*{description}" class="input">
+        <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
+        <label for="amount" class="label">Amount</label>
+        <input type="number" id="amount" th:field="*{amount}" class="input">
+        <div class="error" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+
+        <label class="label">Type</label>
+        <input type="radio" id="type-income" name="type" th:value="true" th:field="*{type}"><label for="type-income">
+        Income</label>
+        <input type="radio" id="type-outcome" name="type" th:value="false" th:field="*{type}"><label for="type-outcome">
+        Outcome</label>
+        <br>
+
+        <input type="submit" class="btn" th:value="UPDATE">
+    </form>
+    <div th:if="${errorMsg}" class="error">
+        <p th:text="${errorMsg}"></p>
+    </div>
+</div>
+</body>
+</html>

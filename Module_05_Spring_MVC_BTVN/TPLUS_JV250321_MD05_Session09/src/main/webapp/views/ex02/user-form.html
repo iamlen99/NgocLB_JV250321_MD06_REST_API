@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>+ Thêm người dùng</h2>
+<form th:object="${user}" th:action="@{/userControllerEx02/saveUser}" method="post">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input type="number" th:value="${id}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" th:field="*{name}"/>
+                <span class="error" th:errors="*{name}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"/>
+                <span class="error" th:errors="*{email}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}"/>
+                <span class="error"
+                      th:if="${#fields.hasErrors('password')}"
+                      th:text="${#fields.errors('password')[0]}">
+                </span>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
