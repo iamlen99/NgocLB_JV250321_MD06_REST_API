@@ -6,30 +6,34 @@ import ra.edu.model.repository.BookingRepository;
 import ra.edu.utils.ConnectionDB;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @Repository
 public class BookingRepositoryImpl implements BookingRepository {
     @Override
-    public void save(Booking booking) {
+    public boolean save(Booking booking) {
         Connection conn = null;
-        PreparedStatement preStmt = null;
-        String sql = "INSERT INTO bookings (room_id, customer_id, check_in_date, check_out_date, guests, notes) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = null;
+        String sql = "INSERT INTO bookings (customer_id, room_id, check_in, check_out, total_price, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
         try {
             conn = ConnectionDB.openConnection();
-            preStmt = conn.prepareStatement(sql) ;
-                preStmt.setInt(1, booking.getRoomId());
-                preStmt.setInt(2, booking.getCustomerId());
-                preStmt.setString(3, booking.getCheckInDate());
-                preStmt.setString(4, booking.getCheckOutDate());
-                preStmt.setInt(5, booking.getGuests());
-                preStmt.setString(6, booking.getNotes());
-                preStmt.executeUpdate();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setLong(1, booking.getCustomerId());
+            ps.setInt(2, booking.getRoomId());
+            ps.setDate(3, Date.valueOf(booking.getCheckIn()));
+            ps.setDate(4, Date.valueOf(booking.getCheckOut()));
+            ps.setDouble(5, booking.getTotalPrice());
+            ps.setString(6, booking.getStatus());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
+            e.printStackTrace();
         } finally {
-            ConnectionDB.closeConnection(preStmt, conn);
+            ConnectionDB.closeConnection(pstmt, conn);
         }
+        return false;
     }
 }

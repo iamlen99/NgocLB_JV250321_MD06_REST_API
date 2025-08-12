@@ -12,7 +12,7 @@ public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
 
     @Override
-    public void saveBooking(Booking booking) {
-        bookingRepository.save(booking);
+    public boolean saveBooking(Booking booking) {
+        return bookingRepository.save(booking);
     }
 }

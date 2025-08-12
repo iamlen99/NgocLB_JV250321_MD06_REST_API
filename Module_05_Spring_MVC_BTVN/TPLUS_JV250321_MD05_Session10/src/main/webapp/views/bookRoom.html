@@ -1,21 +1,16 @@
 <form th:action="@{/home/bookings}" th:object="${booking}" method="post">
-    <label>Room ID:</label>
-    <input type="number" th:field="*{roomId}" required><br>
+    <input type="hidden" th:field="*{roomId}" />
+    <input type="hidden" name="customerId" value="1" />
 
-    <label>Customer ID:</label>
-    <input type="number" th:field="*{customerId}" required><br>
+    <p>Phòng: <span th:text="${room.roomName}"></span></p>
+    <p>Loại phòng: <span th:text="${room.roomType}"></span></p>
+    <p>Giá/Ngày: <span th:text="${room.price}"></span></p>
 
-    <label>Check-in Date:</label>
-    <input type="date" th:field="*{checkInDate}" required><br>
+    <label>Ngày nhận phòng:</label>
+    <input type="date" th:field="*{checkIn}" required/><br/>
 
-    <label>Check-out Date:</label>
-    <input type="date" th:field="*{checkOutDate}" required><br>
+    <label>Ngày trả phòng:</label>
+    <input type="date" th:field="*{checkOut}" required/><br/>
 
-    <label>Guests:</label>
-    <input type="number" th:field="*{guests}" required><br>
-
-    <label>Notes:</label>
-    <textarea th:field="*{notes}"></textarea><br>
-
-    <button type="submit">Book Room</button>
+    <button type="submit">Xác nhận đặt</button>
 </form>

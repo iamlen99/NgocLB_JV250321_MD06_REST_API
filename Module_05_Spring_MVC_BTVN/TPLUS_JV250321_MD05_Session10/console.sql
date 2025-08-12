@@ -23,18 +23,18 @@ create table rooms
     image     varchar(255) not null
 );
 
-CREATE TABLE booking
+CREATE TABLE bookings
 (
-    id             INT AUTO_INCREMENT PRIMARY KEY,
-    room_id        INT  NOT NULL,
-    customer_id    INT  NOT NULL,
-    check_in_date  DATE NOT NULL,
-    check_out_date DATE NOT NULL,
-    guests         INT  NOT NULL CHECK (guests > 0),
-    notes          VARCHAR(255),
+    id           BIGINT AUTO_INCREMENT PRIMARY KEY,
+    customer_id  BIGINT NOT NULL,
+    room_id      INT    NOT NULL,
+    check_in     DATE   NOT NULL,
+    check_out    DATE   NOT NULL,
+    total_price  DOUBLE NOT NULL CHECK (total_price >= 1),
+    booking_date TIMESTAMP                                DEFAULT CURRENT_TIMESTAMP,
+    status       ENUM ('PENDING','CONFIRMED','CANCELLED') DEFAULT 'PENDING',
 
-    -- Nếu bạn có bảng room và customer thì tạo khóa ngoại:
-    CONSTRAINT fk_booking_room FOREIGN KEY (room_id) REFERENCES room (id) ON DELETE CASCADE,
-    CONSTRAINT fk_booking_customer FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE
+    CONSTRAINT fk_booking_customer FOREIGN KEY (customer_id) REFERENCES customers (id),
+    CONSTRAINT fk_booking_room FOREIGN KEY (room_id) REFERENCES rooms (id)
 );
 
