@@ -1,4 +1,4 @@
-package ra.exercise.strorage;
+package ra.edu.storage;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -11,16 +11,12 @@ import java.util.Map;
 @Service
 public class CloudinaryService {
     private final Cloudinary cloudinary;
-
     public CloudinaryService(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;
     }
 
     public String uploadImage(MultipartFile file) throws IOException {
-        Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
-                "folder", "app_images",
-                "resource_type", "image"
-        ));
+        Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
         return upload.get("secure_url").toString();
     }
 }

@@ -1,0 +1,21 @@
+<form th:action="@{/home/bookings}" th:object="${booking}" method="post">
+    <label>Room ID:</label>
+    <input type="number" th:field="*{roomId}" required><br>
+
+    <label>Customer ID:</label>
+    <input type="number" th:field="*{customerId}" required><br>
+
+    <label>Check-in Date:</label>
+    <input type="date" th:field="*{checkInDate}" required><br>
+
+    <label>Check-out Date:</label>
+    <input type="date" th:field="*{checkOutDate}" required><br>
+
+    <label>Guests:</label>
+    <input type="number" th:field="*{guests}" required><br>
+
+    <label>Notes:</label>
+    <textarea th:field="*{notes}"></textarea><br>
+
+    <button type="submit">Book Room</button>
+</form>

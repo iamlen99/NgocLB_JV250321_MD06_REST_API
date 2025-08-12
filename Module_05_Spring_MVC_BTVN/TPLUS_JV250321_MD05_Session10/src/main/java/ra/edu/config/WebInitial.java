@@ -1,7 +1,8 @@
-package ra.exercise.config;
+package ra.edu.config;
 
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
+import lombok.NonNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInitial extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -18,14 +19,14 @@ public class WebInitial extends AbstractAnnotationConfigDispatcherServletInitial
     }
 
     @Override
+    @org.springframework.lang.NonNull
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
 
     @Override
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+    protected void customizeRegistration(@NonNull ServletRegistration.Dynamic registration) {
         super.customizeRegistration(registration);
-        //50MB
         long MAX_FILE_SIZE = 50 * 1024 * 1024L;
         registration.setMultipartConfig(new MultipartConfigElement(TMP_PATH, MAX_FILE_SIZE, 4 * MAX_FILE_SIZE, 50 * 1024 * 1024));
     }
