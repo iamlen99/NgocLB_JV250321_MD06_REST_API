@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ra.exercise.model.entity.Movie;
 import ra.exercise.model.service.MovieService;
-import ra.exercise.strorage.CloudinaryService;
+import ra.exercise.storage.CloudinaryService;
 
 import java.io.IOException;
 import java.util.Optional;

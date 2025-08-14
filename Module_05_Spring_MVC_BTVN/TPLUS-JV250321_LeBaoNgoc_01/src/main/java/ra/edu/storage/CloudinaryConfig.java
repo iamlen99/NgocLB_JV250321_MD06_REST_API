@@ -1,4 +1,4 @@
-package ra.exercise.strorage;
+package ra.edu.storage;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

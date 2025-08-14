@@ -15,12 +15,9 @@ import java.time.LocalDateTime;
 public class Booking {
     private Long id;
     private Long customerId;
-    private Integer roomId;
-    private LocalDate checkIn;
-    private LocalDate checkOut;
-    private double totalPrice;
-    private LocalDateTime bookingDate;
-    private String status;
+    private Long roomId;
+    private LocalDate bookingDate;
+    private Double price;
 }
 
 

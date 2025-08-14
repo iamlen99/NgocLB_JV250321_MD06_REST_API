@@ -2,11 +2,9 @@ package ra.exercise.model.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import ra.exercise.model.entity.Movie;
 import ra.exercise.model.repository.MovieRepository;
 import ra.exercise.model.service.MovieService;
-import ra.exercise.strorage.CloudinaryService;
 
 import java.util.List;
 import java.util.Optional;
