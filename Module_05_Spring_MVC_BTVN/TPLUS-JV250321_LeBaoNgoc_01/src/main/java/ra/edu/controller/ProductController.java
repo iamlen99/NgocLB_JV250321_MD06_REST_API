@@ -34,7 +34,6 @@ public class ProductController {
         if (searchValue == null || searchValue.isBlank()) {
             products = productService.getProducts(page, pageSize);
             totalPages = productService.getProductsTotalPages(pageSize);
-            System.out.println(products.size());
         } else {
             products = productService.getProductsByName(searchValue, page, pageSize);
             totalPages = productService.getProductsTotalPages(searchValue, pageSize);

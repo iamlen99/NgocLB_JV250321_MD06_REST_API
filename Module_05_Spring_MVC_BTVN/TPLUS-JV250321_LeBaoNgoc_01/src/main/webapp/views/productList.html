@@ -11,7 +11,7 @@
 
     <div style="margin-bottom:16px; display:flex; flex-wrap:wrap; justify-content:space-between;">
         <a th:href="@{/productController/addPage}"
-           style="background:#2b6cb0;color:white;padding:8px 12px;border-radius:6px;text-decoration:none;">Thêm danh mục</a>
+           style="background:#2b6cb0;color:white;padding:8px 12px;border-radius:6px;text-decoration:none;">Thêm sản phẩm</a>
         <form method="get" th:action="@{/productController/productPage(page=${page})}">
             <label>
                 <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Nhập tên sản phẩm">
