@@ -12,6 +12,7 @@ import ra.edu.model.service.ProductService;
 import ra.edu.storage.CloudinaryService;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,16 +78,12 @@ public class ProductController {
             return "addProductForm";
         }
 
-        Optional<Product> productFound = productService.getProductByName(product.getProductName());
-        if (productFound.isPresent()) {
-            result.rejectValue("productName", "error.product", "Tên sản phẩm đã tồn tại");
-            return "addProductForm";
-        }
 
         if (file == null || file.isEmpty()) {
             model.addAttribute("posterError", "Chưa upload file hoặc file trống");
             return "addProductForm";
         }
+        product.setCreatedAt(LocalDateTime.now());
 
         try {
             String imgUrl = cloudinaryService.uploadImage(file);
@@ -119,6 +116,8 @@ public class ProductController {
                 return "editProductForm";
             }
         }
+        product.setCreatedAt(LocalDateTime.now());
+        product.setImageUrl(productService.getProductById(product.getProductId()).get().getImageUrl());
 
         if (file != null && !file.isEmpty()) {
             try {

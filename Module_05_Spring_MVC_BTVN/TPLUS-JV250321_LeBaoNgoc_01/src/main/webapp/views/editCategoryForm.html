@@ -17,25 +17,25 @@
 
 <main style="max-width:1100px;margin:24px auto;padding:0 12px;">
     <h2 style="color:#1a202c;margin-bottom:12px;">Sửa danh mục</h2>
-    <p th:text="" style="color: red"></p>
+<!--    <p th:text="errMsg" style="color: red"></p>-->
 
-    <form th:action="@{/categoryController/update}" th:object="category" method="post">
+    <form th:action="@{/categoryController/update}" th:object="${category}" method="post">
         <table>
             <tr>
                 <td>Mã danh mục:</td>
-                <td><input type="hidden" th:field="*{category.id}">
+                <td><input type="text" th:field="*{categoryId}"  readonly>
                 </td>
             </tr>
             <tr>
                 <td>Tên danh mục:</td>
-                <td><input type="text" th:field="*{category.categoryName}">
-                    <p th:errors="*{category.categoryName}" style="color:red;"></p>
+                <td><input type="text" th:field="*{categoryName}">
+                    <p th:errors="*{categoryName}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
                 <td>Mô tả:</td>
-                <td><input type="text" th:field="*{category.description}">
-                    <p th:errors="*{category.description}" style="color:red;"></p>
+                <td><input type="text" th:field="*{description}">
+                    <p th:errors="*{description}" style="color:red;"></p>
                 </td>
             </tr>
         </table>

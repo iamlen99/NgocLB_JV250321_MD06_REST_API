@@ -1,5 +1,6 @@
 package ra.edu.model.repository.impl;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import ra.edu.model.entity.Product;
 import ra.edu.model.repository.ProductRepository;
@@ -7,6 +8,7 @@ import ra.edu.model.utils.ConnectionDB;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +33,8 @@ public class ProductRepositoryImpl implements ProductRepository {
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
                 product.setImageUrl(rs.getString("image_url"));
-                product.setStatus(Boolean.parseBoolean(rs.getString("status")));
-                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
+                product.setStatus(rs.getBoolean("status"));
+                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 product.setCategoryId(rs.getInt("category_id"));
                 products.add(product);
             }
@@ -64,8 +66,8 @@ public class ProductRepositoryImpl implements ProductRepository {
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
                 product.setImageUrl(rs.getString("image_url"));
-                product.setStatus(Boolean.parseBoolean(rs.getString("status")));
-                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
+                product.setStatus(rs.getBoolean("status"));
+                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 product.setCategoryId(rs.getInt("category_id"));
                 products.add(product);
             }
@@ -121,7 +123,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public boolean save(Product product) {
         Connection conn = null;
         PreparedStatement preStmt = null;
-        String sql = "insert into product (product_name, description, price, image_url, createAt,category_id) values(?,?,?,?,?,?)";
+        String sql = "insert into product (product_name, description, price, image_url, created_at,category_id) values(?,?,?,?,?,?)";
         try {
             conn = ConnectionDB.openConnection();
             preStmt = conn.prepareCall(sql);
@@ -129,7 +131,8 @@ public class ProductRepositoryImpl implements ProductRepository {
             preStmt.setString(2, product.getDescription());
             preStmt.setDouble(3, product.getPrice());
             preStmt.setString(4, product.getImageUrl());
-            preStmt.setDate(5, Date.valueOf(product.getCreatedAt().toLocalDate()));
+            preStmt.setTimestamp(5, Timestamp.valueOf(product.getCreatedAt()));
+            preStmt.setInt(6, product.getCategoryId());
             preStmt.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -157,8 +160,8 @@ public class ProductRepositoryImpl implements ProductRepository {
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
                 product.setImageUrl(rs.getString("image_url"));
-                product.setStatus(Boolean.parseBoolean(rs.getString("status")));
-                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
+                product.setStatus(rs.getBoolean("status"));
+                product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 product.setCategoryId(rs.getInt("category_id"));
                 return Optional.of(product);
             }
@@ -182,7 +185,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             preStmt.setString(2, product.getDescription());
             preStmt.setDouble(3, product.getPrice());
             preStmt.setString(4, product.getImageUrl());
-            preStmt.setDate(5, Date.valueOf(product.getCreatedAt().toLocalDate()));
+            preStmt.setTimestamp(5, Timestamp.valueOf(product.getCreatedAt()));
             preStmt.setInt(6, product.getCategoryId());
             preStmt.executeUpdate();
             return true;
@@ -231,7 +234,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
                 product.setImageUrl(rs.getString("image_url"));
-                product.setStatus(Boolean.parseBoolean(rs.getString("status")));
+                product.setStatus(rs.getBoolean("status"));
                 product.setCreatedAt(LocalDateTime.parse(rs.getString("created_at")));
                 product.setCategoryId(rs.getInt("category_id"));
                 return Optional.of(product);

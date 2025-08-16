@@ -17,45 +17,46 @@
 
 <main style="max-width:1100px;margin:24px auto;padding:0 12px;">
     <h2 style="color:#1a202c;margin-bottom:12px;">Sửa sản phẩm</h2>
-    <p th:text="" style="color: red"></p>
+<!--    <p th:text="errMsg" style="color: red"></p>-->
 
-    <form th:action="@{/productController/add}" th:object="product" method="post" enctype="multipart/form-data">
+    <form th:action="@{/productController/update}" th:object="${product}" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>Mã sản phẩm:</td>
-                <td><input type="hidden" th:field="*{product.productId}">
+                <td><input type="text" th:field="*{productId}" readonly>
                 </td>
             </tr>
             <tr>
                 <td>Tên sản phẩm:</td>
-                <td><input type="text" th:field="*{product.productName}">
-                    <p th:errors="*{product.productName}" style="color:red;"></p>
+                <td><input type="text" th:field="*{productName}">
+                    <p th:errors="*{productName}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
                 <td>Mô tả sản phẩm:</td>
-                <td><input type="text" th:field="*{product.description}">
-                    <p th:errors="*{product.description}" style="color:red;"></p>
+                <td><input type="text" th:field="*{description}">
+                    <p th:errors="*{description}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
                 <td>Giá sản phẩm:</td>
-                <td><input type="text" th:field="*{product.price}">
-                    <p th:errors="*{product.price}" style="color:red;"></p>
+                <td><input type="text" th:field="*{price}">
+                    <p th:errors="*{price}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
                 <td>Ảnh sản phẩm:</td>
                 <td><input type="file" name="file">
-                    <p th:errors="*{product.imageUrl}" style="color:red;"></p>
+                    <p th:errors="*{imageUrl}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
                 <td>Mã danh mục:</td>
-                <td><input type="text" th:field="*{product.categoryId}">
-                    <p th:errors="*{product.categoryId}" style="color:red;"></p>
+                <td><input type="text" th:field="*{categoryId}">
+                    <p th:errors="*{categoryId}" style="color:red;"></p>
                 </td>
             </tr>
+            <input type="hidden" th:field="*{createdAt}">
         </table>
         <button type="submit">Sửa</button>
     </form>

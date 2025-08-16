@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:20px; text-align: center; font-size: 30px">Bài tập về nhà session 12</h2>
+    <nav style="margin-bottom:12px; text-align: center">
+        <a th:href="@{/userController/auth/register}"
+           style="color:#2b6cb0;margin-right:30px;text-decoration:none; font-size: 20px">1. Bài tập 1</a>
+        <a th:href="@{/userController/auth/login}"
+           style="color:#2b6cb0;text-decoration:none; font-size: 20px">2. Bài tập 2</a>
+    </nav>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
