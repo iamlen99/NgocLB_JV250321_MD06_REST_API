@@ -62,6 +62,11 @@ public class UserController {
             return "ex01/register";
         }
 
+        if (userService.findByEmail(userDTO.getEmail()).isPresent()) {
+            result.rejectValue("email", "error.email", "Email đã tồn tại!");
+            return "ex01/register";
+        }
+
         if (userDTO.getImageFile() == null || userDTO.getImageFile().isEmpty()) {
             result.rejectValue("imageFile", "error.avatar", "Avatar không được để trống!");
             return "ex01/register";
@@ -96,10 +101,17 @@ public class UserController {
                                 HttpSession session,
                                 RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "ex01/register";
+            return "ex06/profile";
+        }
+
+        if (userService.findByEmail(userDTO.getEmail()).isPresent() &&
+                !userService.findByEmail(userDTO.getEmail()).get().getId().equals(userDTO.getId())) {
+            result.rejectValue("email", "error.email", "Email đã tồn tại!");
+            return "ex06/profile";
         }
         userService.updateUser(userDTO, session);
+        session.setAttribute("currentUser", userService.findById(userDTO.getId()).get());
         redirectAttributes.addFlashAttribute("successMsg", "Cập nhật profile thành công");
-        return "redirect:/userController/login";
+        return "redirect:/postController";
     }
 }

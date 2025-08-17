@@ -27,7 +27,6 @@ public class PostController {
         if (currentUser == null) {
             return "redirect:/userController/login";
         }
-        model.addAttribute("currentUser", currentUser);
         model.addAttribute("posts", postService.findAllPosts(currentUser.getId()));
         return "ex03/postList";
     }

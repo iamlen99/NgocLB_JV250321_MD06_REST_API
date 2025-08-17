@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
-import ra.edu.validation.NotExistEmail;
 
 @Getter
 @Setter
@@ -15,7 +14,6 @@ import ra.edu.validation.NotExistEmail;
 public class UserDTO {
     private Long id;
     @NotBlank(message = "Email không được để trống!")
-    @NotExistEmail
     private String email;
     @NotBlank(message = "Mật khẩu không được để trống!")
     private String password;
