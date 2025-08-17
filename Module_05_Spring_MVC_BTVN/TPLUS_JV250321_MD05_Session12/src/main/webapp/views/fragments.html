@@ -4,11 +4,12 @@
 
 <!-- Header fragment -->
 <div th:fragment="header">
-    <header style="background:#2b6cb0;color:white;padding:16px;">
-        <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;">
-            <h1 style="margin:0;font-size:20px;">My Homework</h1>
+    <link rel="stylesheet" th:href="@{/css/fragments.css}">
+    <header>
+        <div>
+            <h1>My Homework</h1>
             <nav>
-                <a th:href="@{/}" style="color:white;margin-right:12px;text-decoration:none;">HomeworkPage</a>
+                <a th:href="@{/}">HomeworkPage</a>
             </nav>
         </div>
     </header>
@@ -20,8 +21,8 @@
 
 <!-- Footer fragment -->
 <div th:fragment="footer">
-    <footer style="background:#f1f5f9;padding:12px;margin-top:24px;">
-        <div style="max-width:1100px;margin:0 auto;text-align:center;color:#444;">
+    <footer>
+        <div>
             <small>© 2025 - My Homework</small>
         </div>
     </footer>

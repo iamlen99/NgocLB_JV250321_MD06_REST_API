@@ -1,5 +1,6 @@
 package ra.edu.service.impl;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ra.edu.model.dto.UserDTO;
@@ -49,7 +50,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(UserDTO userDTO, HttpSession session) {
+        User user = new User();
+        user.setId(userDTO.getId());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setFullName(userDTO.getFullName());
+        if (userDTO.getImageFile() != null && !userDTO.getImageFile().isEmpty()) {
+            try {
+                user.setAvatar(cloudinaryService.uploadImage(userDTO.getImageFile()));
+            } catch (IOException e) {
+                System.out.println("Có lỗi trong quá trình upload ảnh:" + e.getMessage());
+            }
+        } else {
+            User currentUser = (User) session.getAttribute("currentUser");
+            user.setAvatar(currentUser.getAvatar());
+        }
         userRepository.update(user);
     }
 

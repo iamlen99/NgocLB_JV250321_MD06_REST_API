@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <h2 style="color:#1a202c;margin-bottom:12px;">Thêm mới bài viết</h2>
+
+    <form th:action="@{/postController/add}" th:object="${postDTO}" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Nội dung:</td>
+                <td><input type="text" th:field="*{content}">
+                    <p th:errors="*{content}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Ảnh:</td>
+                <td><input type="file" th:field="*{imageFile}">
+                    <p th:errors="*{imageFile}" style="color:red;"></p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Thêm bài viết</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

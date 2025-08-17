@@ -1,5 +1,6 @@
 package ra.edu.service;
 
+import jakarta.servlet.http.HttpSession;
 import ra.edu.model.dto.UserDTO;
 import ra.edu.model.entity.User;
 
@@ -11,6 +12,6 @@ public interface UserService {
     Optional<User> findById(Long id);
     Optional<User> findByEmail(String email);
     void addUser(UserDTO userDTO);
-    void updateUser(User user);
+    void updateUser(UserDTO userDTO, HttpSession session);
     void deleteUser(User user);
 }
