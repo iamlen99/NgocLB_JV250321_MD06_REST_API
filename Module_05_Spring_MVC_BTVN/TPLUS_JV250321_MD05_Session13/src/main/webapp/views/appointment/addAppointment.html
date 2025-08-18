@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+
+        input {
+            width: 200px;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:12px;">Thêm mới lịch khám</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <form th:action="@{/appointmentController/add}" th:object="${appointment}" method="post">
+        <table>
+            <tr>
+                <td>Ngày hẹn:</td>
+                <td><input type="date" th:field="*{date}">
+                    <p th:errors="*{date}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Giờ hẹn:</td>
+                <td><input type="text" th:field="*{hour}">
+                    <p th:errors="*{hour}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Bệnh nhân:</td>
+                <td><select type="text" th:field="*{patient.id}">
+                    <option th:each="patient : ${patients}" th:value="${patient.id}">
+                        <span th:text="${patient.fullName}"></span></option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Bác sĩ:</td>
+                <td><select type="text" th:field="*{doctor.id}">
+                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}">
+                        <span th:text="${doctor.fullName}"></span>
+                    </option>
+                </select>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" style="cursor: pointer">Thêm mới</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

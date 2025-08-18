@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <h2>Bài tập về nhà session 13</h2>
+    <nav>
+        <a th:href="@{/doctorController}">1. Bài tập 1</a>
+        <a th:href="@{/doctorController/add}">2. Bài tập 2</a>
+        <a th:href="@{/doctorController}">3. Bài tập 3</a>
+        <a th:href="@{/doctorController}">4. Bài tập 4</a>
+        <a th:href="@{/patientController}">5. Bài tập 5</a>
+        <a th:href="@{/patientController/add}">6. Bài tập 6</a>
+        <a th:href="@{/patientController}">7. Bài tập 7</a>
+        <a th:href="@{/patientController}">8. Bài tập 8</a>
+        <a th:href="@{/appointmentController/add}">9. Bài tập 9</a>
+        <a th:href="@{/appointmentController}">10. Bài tập 10</a>
+    </nav>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <h2>Danh sách lịch khám</h2>
+
+    <div class="add-btn">
+        <a th:href="@{/appointmentController/add}">Thêm lịch khám</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ngày khám</th>
+            <th>Giờ khám</th>
+            <th>Bệnh nhân</th>
+            <th>Bác sĩ</th>
+            <th>Hủy lịch khám</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td th:text="${#temporals.format(appointment.date, 'dd/MM/yyyy')}"></td>
+            <td th:text="${appointment.hour + '(h)'}"></td>
+            <td th:text="${appointment.patient.fullName}"></td>
+            <td th:text="${appointment.doctor.fullName}"></td>
+            <td>
+                <a th:href="@{/appointmentController/delete/{id}(id=${appointment.id})}"
+                   onclick="return confirm('Bạn có chắc chắn muốn hủy lịch khám này không?')"
+                >Cancel</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(appointments)}">
+            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Chưa có lịch khám nào</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${totalPages > 0}">
+        <a th:each="page : ${#numbers.sequence(1, totalPages)}"
+           th:text="${page}"
+           th:href="@{/appointmentController(page=${page})}"
+           th:styleappend="${page==currentPage} ? 'background-color: red;' : ''"
+           class="pagination">
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
