@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List Product</title>
+    <title>Categories</title>
     <link rel="stylesheet" th:href="@{/css/list.css}"/>
 </head>
 <!-- Kế thừa header/footer từ fragments -->
@@ -13,23 +13,12 @@
 
 <main>
     <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
     <h2>Danh sách sản phẩm</h2>
 
-    <div class="search-container">
-        <form th:action="@{/products/home}" method="get">
-            <div>
-                <input type="text" name="searchValue" placeholder="Nhập tên sản phẩm" th:value="${searchValue}"/>
-                <button type="submit">Search</button>
-            </div>
-            <select name="categoryId">
-                <option value="">-- Tất cả danh mục --</option>
-                <option th:each="category : ${categories}"
-                        th:value="${category.id}"
-                        th:text="${category.categoryName}"
-                        th:selected="${currentCategoryId == category.id}"
-                ></option>
-            </select>
-        </form>
+    <div class="add-btn">
+        <a th:href="@{/products/add}">Thêm sản phẩm</a>
+        <a th:href="@{/carts}">Xem giỏ hàng</a>
     </div>
 
     <table>
@@ -39,6 +28,8 @@
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Stock</th>
+            <th>Danh mục</th>
+            <th>Hoạt động</th>
         </tr>
         </thead>
         <tbody>
@@ -47,9 +38,17 @@
             <td th:text="${product.productName}"></td>
             <td th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></td>
             <td th:text="${product.stock}"></td>
+            <td th:text="${product.category.categoryName}"></td>
+            <td>
+                <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+                <a th:href="@{/products/delete/{id}(id=${product.id})}"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')"
+                >Delete</a>
+                <a th:href="@{'/carts/add/' + ${product.id}}">Thêm vào giỏ</a>
+            </td>
         </tr>
         <tr th:if="${#lists.isEmpty(products)}">
-            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy sản phẩm</td>
+            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Chưa có sản phẩm nào</td>
         </tr>
         </tbody>
     </table>

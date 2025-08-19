@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Add Category</title>
     <style>
         td {
             vertical-align: top;
@@ -16,26 +16,25 @@
 <div th:replace="~{fragments :: header}"></div>
 
 <main style="max-width:1100px;margin:24px auto;padding:0 12px;">
-    <p th:text="${successMsg}" style="color: green"></p>
-    <h2 style="color:#1a202c;margin-bottom:12px;">Đăng nhập</h2>
+    <h2 style="color:#1a202c;margin-bottom:12px;">Thêm mới danh mục</h2>
     <p th:text="${errMsg}" style="color: red"></p>
 
-    <form th:action="@{/auth/login}" th:object="${loginDTO}" method="post">
+    <form th:action="@{/categories/add}" th:object="${category}" method="post">
         <table>
             <tr>
-                <td>Tên đăng nhập:</td>
-                <td><input type="text" th:field="*{username}">
-                    <p th:errors="*{username}" style="color:red;"></p>
+                <td>Tên danh mục:</td>
+                <td><input type="text" th:field="*{categoryName}">
+                    <p th:errors="*{categoryName}" style="color:red;"></p>
                 </td>
             </tr>
             <tr>
-                <td>Mật khẩu:</td>
-                <td><input type="password" th:field="*{password}">
-                    <p th:errors="*{password}" style="color:red;"></p>
+                <td>Mô tả:</td>
+                <td><input type="text" th:field="*{description}">
+                    <p th:errors="*{description}" style="color:red;"></p>
                 </td>
             </tr>
         </table>
-        <button type="submit">Đăng nhập</button>
+        <button type="submit">Thêm mới</button>
     </form>
 </main>
 

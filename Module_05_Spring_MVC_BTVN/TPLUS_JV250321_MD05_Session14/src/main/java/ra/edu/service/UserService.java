@@ -1,4 +1,7 @@
 package ra.edu.service;
 
-public class UserService {
+import ra.edu.model.entity.User;
+
+public interface UserService {
+    User login(String username, String password);
 }
