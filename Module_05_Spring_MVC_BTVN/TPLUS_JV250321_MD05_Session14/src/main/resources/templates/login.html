@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:12px;">Thêm mới tác giả</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <form th:action="@{/authorController/add}" th:object="${loginDTO}" method="post">
+        <table>
+            <tr>
+                <td>Tên tác giả:</td>
+                <td><input type="text" th:field="*{authorName}">
+                    <p th:errors="*{authorName}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Ngày sinh:</td>
+                <td><input type="date" th:field="*{birthday}">
+                    <p th:errors="*{birthday}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Địa chỉ:</td>
+                <td><input type="text" th:field="*{address}">
+                    <p th:errors="*{address}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Lĩnh vực:</td>
+                <td><input type="text" th:field="*{field}">
+                    <p th:errors="*{field}" style="color:red;"></p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Thêm mới</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
