@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <h2>Câu hỏi</span></h2>
+
+    <form th:action="@{/play/exam/{examId}(examId=${question.exam.id})/question/{id}(id=${question.id})}"
+          method="post">
+        <input type="hidden" th:value="${question.id}">
+
+        <p th:text="${question.content}"></p>
+        <label>
+            <input type="radio" th:value="${question.answerA}" name="answer">
+            A: <span th:text="${question.answerA}"></span>
+        </label><br>
+        <label>
+            <input type="radio" th:value="${question.answerB}" name="answer">
+            B: <span th:text="${question.answerB}"></span>
+        </label><br>
+        <label>
+            <input type="radio" th:value="${question.answerC}" name="answer">
+            C: <span th:text="${question.answerC}"></span>
+        </label><br>
+        <label>
+            <input type="radio" th:value="${question.answerD}" name="answer">
+            D: <span th:text="${question.answerD}"></span>
+        </label>
+        <div style="margin-top: 20px">
+            <button class="pagination" type="submit" style="cursor: pointer">Answer</button>
+            <button class="pagination"
+                    type="button" th:href="@{/play/exam/{examId}(examId=${question.exam.id})}"
+                    style="cursor: pointer"
+                    th:onclick="|window.location.href='@{/play/exam/{examId}(examId=${question.exam.id})}'|">
+                Next
+            </button>
+        </div>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

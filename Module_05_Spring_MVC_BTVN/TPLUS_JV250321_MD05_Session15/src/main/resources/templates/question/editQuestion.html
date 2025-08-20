@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+
+        input {
+            width: 200px;
+        }
+
+        textarea {
+            width: 200px;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:12px;">Sửa câu hỏi</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <form th:action="@{/questions/update}" th:object="${question}" method="post">
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" th:field="*{id}" readonly></td>
+            </tr>
+            <tr>
+                <td>Đề thi:</td>
+                <td>
+                    <select th:field="*{exam.id}">
+                        <option value="" disabled selected>-- Chọn đề thi --</option>
+                        <option th:each="exam : ${exams}"
+                                th:value="${exam.id}"
+                                th:text="${exam.title}">
+                        </option>
+                    </select>
+                    <p th:errors="*{exam.id}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Nội dung câu hỏi:</td>
+                <td><input type="text" th:field="*{content}">
+                    <p th:errors="*{content}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Đáp án A:</td>
+                <td><textarea type="text" th:field="*{answerA}"></textarea>
+                    <p th:errors="*{answerA}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Đáp án B:</td>
+                <td><textarea type="text" th:field="*{answerB}"></textarea>
+                    <p th:errors="*{answerB}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Đáp án C:</td>
+                <td><textarea type="text" th:field="*{answerC}"></textarea>
+                    <p th:errors="*{answerC}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Đáp án D:</td>
+                <td><textarea type="text" th:field="*{answerD}"></textarea>
+                    <p th:errors="*{answerD}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Đáp án đúng:</td>
+                <td><textarea type="text" th:field="*{answerTrue}"></textarea>
+                    <p th:errors="*{answerTrue}" style="color:red;"></p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Cập nhật</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <h2>Lịch sử người dùng</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên người dùng</th>
+            <th>Tên bài thi</th>
+            <th>Số câu đúng</th>
+            <th>Số câu sai</th>
+            <th>Tình trạng</th>
+            <th>Hoạt động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="history : ${histories.content}">
+            <td th:text="${history.id}"></td>
+            <td th:text="${history.username}"></td>
+            <td th:text="${history.exam.title}"></td>
+            <td th:text="${history.correctAnswers}"></td>
+            <td th:text="${history.wrongAnswers}"></td>
+            <td th:text="${history.complete}"></td>
+            <td>
+                <a th:href="@{/histories/delete/{id}(id=${history.id})}"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa lịch sử này không?')">Xóa</a>
+            </td>
+        </tr>
+        <tr th:if="${histories.content.size() == 0}">
+            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Chưa có lịch sử</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${histories.content.size() > 0}">
+        <a th:if="${historys.hasPrevious()}"
+           th:href="@{/historys(page=${historys.number - 1}, size=${historys.size})}" class="pagination">Prev</a>
+        <a th:each="pageNum : ${#numbers.sequence(0, historys.totalPages -1)}"
+           th:text="${pageNum +1}"
+           th:href="@{/histories(page=${pageNum}, size=${histories.size})}"
+           th:styleappend="${pageNum == histories.number} ? 'background-color:red' : ''"
+           class="pagination"
+        ></a>
+        <a th:if="${histories.hasNext()}"
+           th:href="@{/histories(page=${histories.number + 1}, size=${histories.size})}" class="pagination">Next</a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
