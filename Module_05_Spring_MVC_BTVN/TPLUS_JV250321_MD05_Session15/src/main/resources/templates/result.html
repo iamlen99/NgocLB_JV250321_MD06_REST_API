@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <input type="hidden" th:value="${examId}" name="examId">
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <p>Câu hỏi: <span th:text="${questionContent}"></span></p>
+    <p>Đáp án bạn chọn: <b th:text="${yourAnswer}"></b></p>
+    <p>Đáp án đúng là: <b th:text="${trueAnswer}"></b></p>
+    <a th:href="@{/play/exam/{examId}/next(examId=${examId})}"
+       class="pagination"
+    >Câu hỏi tiếp theo</a>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
