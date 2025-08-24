@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:12px;">Sửa lịch trình</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <form th:action="@{/schedules/edit}" th:object="${schedule}" method="post" enctype="multipart/form-data">
+        <table>
+            <input type="hidden" th:field="*{id}"/>
+            <tr>
+                <td>Tên xe:</td>
+                <td>
+                    <select th:field="*{bus}" id="">
+                        <option th:each="bus : ${buses}"
+                                th:value="${bus.id}"
+                                th:text="${bus.licensePlate}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Điểm xuất phát:</td>
+                <td><input type="text" th:field="*{departure}">
+                    <p th:errors="*{departure}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Thời gian xuất phát:</td>
+                <td><input type="datetime-local" th:field="*{departureTime}">
+                    <p th:errors="*{departureTime}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Điểm đến:</td>
+                <td><input type="text" th:field="*{arrival}">
+                    <p th:errors="*{arrival}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Thời gian đến:</td>
+                <td><input type="datetime-local" th:field="*{arrivalTime}">
+                    <p th:errors="*{arrivalTime}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Ảnh xe:</td>
+                <td>
+                    <input type="file" name="file">
+                    <p th:text="${errFile}" style="color:red;"></p>
+                </td>
+
+            </tr>
+        </table>
+        <button type="submit">Cập nhật</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

@@ -24,5 +24,4 @@ public interface ProductService {
     Optional<Product> getProductById(int id);
 
     Optional<Product> getProductByName(String name);
-
 }
