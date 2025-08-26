@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments :: header}"></div>
+
+<main>
+    <h2>Khung chức năng</h2>
+    <nav>
+        <a th:href="@{/courses}">1. Quản lý khóa học</a><br>
+        <a th:href="@{/studentsManagement}">2. Quản lý học viên</a><br>
+        <a th:href="@{/coursesRegister/login}">3. Quản lý đăng ký khóa học</a><br>
+        <a th:href="@{/statistics}">4. Thống kê</a>
+    </nav>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>
