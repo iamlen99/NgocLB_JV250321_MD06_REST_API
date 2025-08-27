@@ -27,6 +27,11 @@ footer {
     background: #f1f5f9;
     padding: 12px;
     margin-top: 24px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 footer div {

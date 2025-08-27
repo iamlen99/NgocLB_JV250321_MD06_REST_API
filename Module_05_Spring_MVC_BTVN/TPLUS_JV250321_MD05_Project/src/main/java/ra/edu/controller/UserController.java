@@ -2,7 +2,6 @@ package ra.edu.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +28,7 @@ public class UserController {
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("userRegister", new UserRegister());
-        return "register";
+        return "public/register";
     }
 
     @PostMapping("/register")
@@ -39,39 +38,40 @@ public class UserController {
             RedirectAttributes redirectAttributes,
             Model model
     ) {
-         if (result.hasErrors()) {
-             return "register";
-         }
+        if (result.hasErrors()) {
+            return "public/register";
+        }
 
-         if (userService.isExistEmail(userRegister.getEmail())) {
-             result.rejectValue("email", "err.email", "Email đã tồn tại");
-             return "register";
-         }
+        if (userService.isExistEmail(userRegister.getEmail())) {
+            result.rejectValue("email", "err.email", "Email đã tồn tại");
+            return "public/register";
+        }
 
         if (userService.isExistPhone(userRegister.getPhone())) {
             result.rejectValue("phone", "err.phone", "Số điện thoại đã tồn tại");
-            return "register";
+            return "public/register";
         }
 
-        if(!userRegister.getPassword().equals(userRegister.getConfirmPassword())) {
+        if (!userRegister.getPassword().equals(userRegister.getConfirmPassword())) {
             result.rejectValue("confirmPassword", "err.confirmPassword", "Mật khẩu xác nhận không trùng khớp");
-            return "register";
-        };
+            return "public/register";
+        }
+        ;
 
-         try {
+        try {
             User savedUser = userService.save(userRegister.toEntity());
-            redirectAttributes.addFlashAttribute("successMsg","Đăng ký tài khoản " + savedUser.getEmail() + " thành công");
+            redirectAttributes.addFlashAttribute("successMsg", "Đăng ký tài khoản " + savedUser.getEmail() + " thành công");
             return "redirect:/users/login";
-         } catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             model.addAttribute("errMsg", "Có lỗi trong quá trình đăng kí, xin thử lại");
-            return "register";
-         }
+            return "public/register";
+        }
     }
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("userLogin", new UserLogin());
-        return "login";
+        return "public/login";
     }
 
     @PostMapping("/login")
@@ -83,7 +83,7 @@ public class UserController {
             HttpSession session
     ) {
         if (result.hasErrors()) {
-            return "login";
+            return "public/login";
         }
 
         Optional<User> userOptional = userService.login(userLogin.getEmail(), userLogin.getPassword());
@@ -93,11 +93,17 @@ public class UserController {
             session.setAttribute("loggedUser", loggedUser);
             redirectAttributes.addFlashAttribute("successMsg", "Đăng nhập thành công");
             if (Role.ADMIN.equals(loggedUser.getRole())) {
-                return "admin";
+                return "admin/admin-index";
             }
-            return "student";
+            return "student/student-index";
         }
         model.addAttribute("errMsg", "Tài khoản hoặc mật khẩu không chính xác");
-        return "login";
+        return "public/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "public/index";
     }
 }

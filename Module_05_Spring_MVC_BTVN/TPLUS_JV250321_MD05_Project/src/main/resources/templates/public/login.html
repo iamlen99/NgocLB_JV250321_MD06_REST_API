@@ -13,7 +13,7 @@
 <body>
 
 <!-- Header -->
-<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments/fragments :: header}"></div>
 
 <main style="max-width:1100px;margin:24px auto;padding:0 12px;">
     <p th:text="${successMsg}" style="color: green"></p>
@@ -41,7 +41,7 @@
 </main>
 
 <!-- Footer -->
-<div th:replace="~{fragments :: footer}"></div>
+<div th:replace="~{fragments/fragments :: footer}"></div>
 
 </body>
 </html>

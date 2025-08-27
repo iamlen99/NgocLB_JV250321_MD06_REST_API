@@ -27,7 +27,7 @@ public class StudentController {
 
     @GetMapping
     public String showStudentPage() {
-        return "student";
+        return "student/student-index";
     }
 
     @GetMapping("/edit")
@@ -49,7 +49,7 @@ public class StudentController {
         studentUpdate.setPhone(loggedUser.getPhone());
         studentUpdate.setSex(loggedUser.getSex());
         model.addAttribute("studentUpdate", studentUpdate);
-        return "edit-student";
+        return "student/edit-student";
     }
 
     @PostMapping("/update")
@@ -61,8 +61,7 @@ public class StudentController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("studentUpdate", studentUpdate);
-            return "edit-student";
+            return "student/edit-student";
         }
 
         User loggedUser = (User) session.getAttribute("loggedUser");
@@ -75,8 +74,7 @@ public class StudentController {
                 userService.isExistEmail(studentUpdate.getEmail())
         ) {
             bindingResult.rejectValue("email", "err.email", "Email đã tồn tại");
-            model.addAttribute("studentUpdate", studentUpdate);
-            return "edit-student";
+            return "student/edit-student";
         }
 
         if (!loggedUser.getPhone().equals(studentUpdate.getPhone()) &&
@@ -84,14 +82,13 @@ public class StudentController {
         ) {
             model.addAttribute("studentUpdate", studentUpdate);
             bindingResult.rejectValue("phone", "err.phone", "Số điện thoại đã tồn tại");
-            return "edit-student";
+            return "student/edit-student";
         }
 
         Optional<User> userOpt = userService.findById(loggedUser.getId());
         if (userOpt.isEmpty()) {
             model.addAttribute("errMsg", "Có lỗi trong quá trình lấy id tài khoản, xin thử lại");
-            model.addAttribute("studentUpdate", studentUpdate);
-            return "edit-student";
+            return "student/edit-student";
         }
 
         User userUpdate = userOpt.get();
@@ -110,7 +107,7 @@ public class StudentController {
         } catch (RuntimeException e) {
             e.printStackTrace();
             model.addAttribute("errMsg", "Có lỗi trong quá trình cập nhật: " + e.getMessage());
-            return "edit-student";
+            return "student/edit-student";
         }
     }
 
@@ -127,7 +124,7 @@ public class StudentController {
         }
         ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO();
         model.addAttribute("changePasswordDTO", changePasswordDTO);
-        return "edit-password";
+        return "student/edit-password";
     }
 
     @PostMapping("/update-password")
@@ -139,7 +136,7 @@ public class StudentController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            return "edit-password";
+            return "student/edit-password";
         }
 
         User loggedUser = (User) session.getAttribute("loggedUser");
@@ -150,18 +147,18 @@ public class StudentController {
 
         if (!BCrypt.checkpw(changePasswordDTO.getCurrentPassword(), loggedUser.getPassword())) {
             bindingResult.rejectValue("currentPassword", "err.currentPassword", "Mật khẩu hiện tại không đúng");
-            return "edit-password";
+            return "student/edit-password";
         };
 
         if(!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmNewPassword())) {
             bindingResult.rejectValue("confirmNewPassword", "err.confirmNewPassword", "Mật khẩu xác nhận không trùng khớp");
-            return "edit-password";
+            return "student/edit-password";
         };
 
         Optional<User> userOpt = userService.findById(loggedUser.getId());
         if (userOpt.isEmpty()) {
             model.addAttribute("errMsg", "Có lỗi trong quá trình lấy id tài khoản, xin thử lại");
-            return "edit-password";
+            return "student/edit-password";
         }
 
         User userUpdate = userOpt.get();
@@ -178,7 +175,7 @@ public class StudentController {
         } catch (RuntimeException e) {
             e.printStackTrace();
             model.addAttribute("errMsg", "Có lỗi trong quá trình cập nhật: " + e.getMessage());
-            return "edit-password";
+            return "student/edit-password";
         }
     }
 }

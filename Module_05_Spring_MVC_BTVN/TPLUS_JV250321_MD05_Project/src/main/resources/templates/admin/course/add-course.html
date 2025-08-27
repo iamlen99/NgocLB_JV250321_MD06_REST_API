@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments/fragments :: header}"></div>
+
+<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
+    <h2 style="color:#1a202c;margin-bottom:12px;">Thêm mới khóa học</h2>
+    <p th:text="${errMsg}" style="color: red"></p>
+
+    <form th:action="@{/courses/add}" th:object="${courseAdd}" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Tên khóa học:</td>
+                <td>
+                    <input type="text" th:field="*{name}">
+                    <p th:errors="*{name}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Thời lượng:</td>
+                <td>
+                    <input type="text" th:field="*{duration}">
+                    <p th:errors="*{duration}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Giảng viên phụ trách:</td>
+                <td>
+                    <input type="text" th:field="*{instructor}">
+                    <p th:errors="*{instructor}" style="color:red;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Hình ảnh:</td>
+                <td>
+                    <input type="file" th:field="*{file}">
+                    <p th:errors="*{file}" style="color:red;"></p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Thêm mới</button>
+    </form>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/fragments :: footer}"></div>
+
+</body>
+</html>
