@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments/fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <h2>Quản lý đăng ký khóa học</h2>
+
+    <div class="search-container">
+        <select name="status" onchange="sortEnrollment(this)">
+            <option th:value="@{/enrollments/show-enrollments(status = null, searchValue = ${searchValue})}"
+                    th:selected="${status == null}">
+                -- Lọc theo trạng thái --
+            </option>
+            <option th:value="@{/enrollments/show-enrollments(status = 'WAITING', searchValue = ${searchValue})}"
+                    th:selected="${status == 'WAITING'}">
+                WAITING
+            </option>
+            <option th:value="@{/enrollments/show-enrollments(status = 'CONFIRMED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'CONFIRMED'}">
+                CONFIRMED
+            </option>
+            <option th:value="@{/enrollments/show-enrollments(status = 'DENIED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'DENIED'}">
+                DENIED
+            </option>
+            <option th:value="@{/enrollments/show-enrollments(status = 'CANCELLED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'CANCELLED'}">
+                CANCELLED
+            </option>
+        </select>
+
+        <form th:action="@{/enrollments/show-enrollments}" method="get">
+            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
+            <button type="submit" style="cursor: pointer">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <table style="margin-top: 20px">
+        <thead>
+        <tr>
+            <th>Mã đăng ký</th>
+            <th>Tên học viên</th>
+            <th>Tên khóa học</th>
+            <th>Ngày thêm</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="enrollment : ${enrollments}">
+            <td th:text="${enrollment.id}"></td>
+            <td th:text="${enrollment.user.name}"></td>
+            <td th:text="${enrollment.course.name}"></td>
+            <td th:text="${#temporals.format(enrollment.createAt, 'dd/MM/yyyy')}"></td>
+            <td th:text="${enrollment.status}"></td>
+            <td>
+                <a th:href="@{/enrollments/confirm-enrollment/{id}(id=${enrollment.id}, status=${status})}">CONFIRM</a>
+                <a th:href="@{/enrollments/deny-enrollment/{id}(id=${enrollment.id}, status=${status})}">DENIED</a>
+            </td>
+
+        </tr>
+        <tr th:if="${enrollments.content.size() == 0}">
+            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy bản đăng ký khóa học nào</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${enrollments.content.size() > 0}">
+        <a th:if="${enrollments.hasPrevious()}"
+           th:href="@{/enrollments/show-enrollments(page = ${enrollments.number - 1}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
+           th:text="Prev"
+           class="pagination">
+        </a>
+
+        <a th:each="pageNum : ${#numbers.sequence(0, enrollments.totalPages - 1)}"
+           th:text="${pageNum + 1}"
+           th:href="@{/enrollments/show-enrollments(page = ${pageNum}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
+           th:styleappend="${pageNum == enrollments.number} ? 'background-color:red' : ''"
+           class="pagination">
+        </a>
+
+        <a th:if="${enrollments.hasNext()}"
+           th:href="@{/enrollments/show-enrollments(page = ${enrollments.number + 1}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
+           class="pagination"
+           th:text="Next">
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/fragments :: footer}"></div>
+<script>
+    function sortEnrollment(field) {
+        window.location.href = field.value;
+    }
+</script>
+</body>
+</html>

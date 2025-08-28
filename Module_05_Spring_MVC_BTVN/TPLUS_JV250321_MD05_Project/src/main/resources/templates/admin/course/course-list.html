@@ -55,10 +55,10 @@
         <tr>
             <th>ID</th>
             <th>Tên khóa học</th>
+            <th>Hình ảnh</th>
             <th>Thời lượng</th>
             <th>Giảng viên phụ trách</th>
             <th>Ngày thêm</th>
-            <th>Hình ảnh</th>
             <th>Hoạt động</th>
         </tr>
         </thead>
@@ -66,14 +66,14 @@
         <tr th:each="course : ${courses}">
             <td th:text="${course.id}"></td>
             <td th:text="${course.name}"></td>
-            <td th:text="${course.duration}"></td>
-            <td th:text="${course.instructor}"></td>
-            <td th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></td>
             <td>
                 <img th:if="${course.image != null}" th:src="@{${course.image}}" style="width:100px;height:100px;"
                      alt="Ảnh khóa học">
                 <span th:if="${course.image == null}">Không có ảnh</span>
             </td>
+            <td th:text="${course.duration}"></td>
+            <td th:text="${course.instructor}"></td>
+            <td th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></td>
             <td>
                 <a th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a>
                 <a th:href="@{/courses/delete/{id}(id=${course.id})}"

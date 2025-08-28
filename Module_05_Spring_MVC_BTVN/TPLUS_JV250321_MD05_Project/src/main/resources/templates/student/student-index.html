@@ -15,10 +15,10 @@
     <p th:text="${successMsg}" style="color: green"></p>
     <h2>Khung chức năng</h2>
     <nav>
-        <a th:href="@{/courses}">1. Xem danh sách khóa học</a><br>
-        <a th:href="@{/coursesRegister}">2. Đăng ký khóa học</a><br>
-        <a th:href="@{/coursesRegister/login}">3. Xem khóa học đã đăng ký</a><br>
-        <a th:href="@{/statistics}">4. Hủy đăng ký</a><br>
+        <a th:href="@{/student/show-course-list}">1. Xem danh sách khóa học</a><br>
+        <a th:href="@{/student/register-course}">2. Đăng ký khóa học</a><br>
+        <a th:href="@{/student/show-enrollment-history}">3. Xem khóa học đã đăng ký</a><br>
+        <a th:href="@{/student/show-enrollment-history}">4. Hủy đăng ký</a><br>
         <a th:href="@{/student/edit}">5. Cập nhật thông tin tài khoản</a><br>
         <a th:href="@{/student/edit-password}">6. Đổi mật khẩu</a>
     </nav>

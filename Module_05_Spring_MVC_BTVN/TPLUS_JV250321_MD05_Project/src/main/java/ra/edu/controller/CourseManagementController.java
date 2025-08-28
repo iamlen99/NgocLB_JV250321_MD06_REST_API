@@ -1,6 +1,5 @@
 package ra.edu.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,6 +185,7 @@ public class CourseManagementController {
                 .duration(courseEdit.getDuration())
                 .instructor(courseEdit.getInstructor())
                 .image(img)
+                .createAt(courseOptional.get().getCreateAt())
                 .build();
 
         try {

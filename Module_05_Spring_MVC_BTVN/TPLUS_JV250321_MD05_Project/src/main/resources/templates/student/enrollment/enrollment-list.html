@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments/fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <h2>Lịch sử đăng ký khóa học</h2>
+
+    <div class="search-container">
+        <form th:action="@{/student/show-enrollment-history}" method="get">
+            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
+            <button type="submit" style="cursor: pointer">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <table style="margin-top: 20px">
+        <thead>
+        <tr>
+            <th>Mã khóa học</th>
+            <th>Tên khóa học</th>
+            <th>Thời lượng (giờ)</th>
+            <th>Giảng viên phụ trách</th>
+            <th>Hình ảnh</th>
+            <th>Ngày thêm</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="enrollment : ${enrollments}">
+            <td th:text="${enrollment.course.id}"></td>
+            <td th:text="${enrollment.course.name}"></td>
+            <td th:text="${enrollment.course.duration}"></td>
+            <td th:text="${enrollment.course.instructor}"></td>
+            <td>
+                <img th:if="${enrollment.course.image != null}" th:src="@{${enrollment.course.image}}" style="width:100px;height:100px;"
+                     alt="Ảnh khóa học">
+                <span th:if="${enrollment.course.image == null}">Không có ảnh</span>
+            </td>
+            <td th:text="${#temporals.format(enrollment.createAt, 'dd/MM/yyyy')}"></td>
+            <td th:text="${enrollment.status}"></td>
+            <td>
+                <a th:href="@{/student/cancel-enrollment/{id}(id=${enrollment.id})}">CANCEL</a>
+            </td>
+
+        </tr>
+        <tr th:if="${enrollments.content.size() == 0}">
+            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy lịch sử đăng ký khóa học nào</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${enrollments.content.size() > 0}">
+        <a th:if="${enrollments.hasPrevious()}"
+           th:href="@{/student/show-enrollment-history(page = ${enrollments.number - 1}, size=${enrollments.size}, searchValue=${searchValue})}"
+           th:text="Prev"
+           class="pagination">
+        </a>
+
+        <a th:each="pageNum : ${#numbers.sequence(0, enrollments.totalPages - 1)}"
+           th:text="${pageNum + 1}"
+           th:href="@{/student/show-enrollment-history(page = ${pageNum}, size=${enrollments.size}, searchValue=${searchValue})}"
+           th:styleappend="${pageNum == enrollments.number} ? 'background-color:red' : ''"
+           class="pagination">
+        </a>
+
+        <a th:if="${enrollments.hasNext()}"
+           th:href="@{/student/show-enrollment-history(page = ${enrollments.number + 1}, size=${enrollments.size}, searchValue=${searchValue})}"
+           class="pagination"
+           th:text="Next">
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/fragments :: footer}"></div>
+</body>
+</html>

@@ -5,14 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import ra.edu.model.dto.CourseDTO;
 import ra.edu.model.entity.Course;
 import ra.edu.repository.CourseRepository;
 import ra.edu.service.CourseService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +32,11 @@ public class CourseServiceImpl implements CourseService {
         };
 
         return PageRequest.of(page, size, sortOrder);
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 
     @Override

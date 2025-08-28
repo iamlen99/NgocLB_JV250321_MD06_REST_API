@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+</head>
+<!-- Kế thừa header/footer từ fragments -->
+<body>
+
+<!-- Header -->
+<div th:replace="~{fragments/fragments :: header}"></div>
+
+<main>
+    <p th:text="${successMsg}" style="color: green"></p>
+    <p th:text="${errMsg}" style="color: red"></p>
+    <h2>Thống kê</h2>
+
+    <table style="margin-top: 20px">
+        <tr>
+            <th>Tổng số lượng khóa học: </th>
+            <td th:text="${allCoursesCount}"></td>
+        </tr>
+        <tr>
+            <th>Tổng số lượng học viên: </th>
+            <td th:text="${allStudentsCount}"></td>
+        </tr>
+        <tr>
+            <th>Tổng số lượng học viên đã đăng ký khóa học: </th>
+            <td th:text="${enrolledStudentsCount}"></td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 20px">
+        <caption style="caption-side: top; font-weight: bold; margin-bottom: 10px;">
+            Top 5 khóa học đông sinh viên nhất
+        </caption>
+        <thead>
+        <tr>
+            <th>Tên khóa học</th>
+            <th>Tổng số học viên</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${top5Courses}">
+            <td th:text="${course.courseName}"></td>
+            <td th:text="${course.studentCount}"></td>
+        </tr>
+        <tr th:if="${studentsPerCourse.content.size() == 0}">
+            <td colspan="2" style="padding:14px;text-align:center;color:#666;">Không tìm thấy khóa học nào</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table style="margin-top: 20px">
+        <caption style="caption-side: top; font-weight: bold; margin-bottom: 10px;">
+            Tổng số học viên theo từng khóa
+        </caption>
+        <thead>
+        <tr>
+            <th>Tên khóa học</th>
+            <th>Tổng số học viên</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${studentsPerCourse}">
+            <td th:text="${course.courseName}"></td>
+            <td th:text="${course.studentCount}"></td>
+        </tr>
+        <tr th:if="${studentsPerCourse.content.size() == 0}">
+            <td colspan="2" style="padding:14px;text-align:center;color:#666;">Không tìm thấy khóa học nào</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${studentsPerCourse.content.size() > 0}" style="margin-bottom: 70px">
+        <a th:if="${studentsPerCourse.hasPrevious()}"
+           th:href="@{/statistics(page = ${studentsPerCourse.number - 1}, size=${studentsPerCourse.size})}"
+           th:text="Prev"
+           class="pagination">
+        </a>
+
+        <a th:each="pageNum : ${#numbers.sequence(0, studentsPerCourse.totalPages - 1)}"
+           th:text="${pageNum + 1}"
+           th:href="@{/statistics(page = ${pageNum}, size=${studentsPerCourse.size})}"
+           th:styleappend="${pageNum == studentsPerCourse.number} ? 'background-color:red' : ''"
+           class="pagination">
+        </a>
+
+        <a th:if="${studentsPerCourse.hasNext()}"
+           th:href="@{/statistics(page = ${studentsPerCourse.number + 1}, size=${studentsPerCourse.size})}"
+           class="pagination"
+           th:text="Next">
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/fragments :: footer}"></div>
+</body>
+</html>
