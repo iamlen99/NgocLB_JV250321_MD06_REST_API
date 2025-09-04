@@ -16,16 +16,16 @@ import ra.edu.model.entity.User;
 import ra.edu.service.EnrollmentService;
 
 @Controller
-@RequestMapping("/enrollments")
+@RequestMapping("/admin")
 public class EnrollmentManagementController {
     @Autowired
     private EnrollmentService enrollmentService;
 
-    @GetMapping("/show-enrollments")
+    @GetMapping("/enrollments")
     public String enrollmentManagement(
             @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "size", defaultValue = "5") Integer size,
-            @RequestParam(value = "searchValue", required = false) String searchValue,
+            @RequestParam(name = "size", defaultValue = "8") Integer size,
+            @RequestParam(value = "searchValue", defaultValue = "") String searchValue,
             @RequestParam(value = "status", required = false) String status,
             Model model,
             RedirectAttributes redirectAttributes,
@@ -38,11 +38,13 @@ public class EnrollmentManagementController {
         }
 
         Page<Enrollment> enrollments;
-        if (searchValue == null || searchValue.isBlank()) {
-            enrollments = enrollmentService.getAllEnrollments(page, size, EnrollmentStatus.fromString(status));
-        } else {
+//        if (searchValue == null || searchValue.isBlank()) {
+//            enrollments = enrollmentService.getAllEnrollments(page, size, EnrollmentStatus.fromString(status));
+//        } else {
             enrollments = enrollmentService.getEnrollmentsByCourseName(page, size, searchValue, EnrollmentStatus.fromString(status));
-        }
+//        }
+
+
         model.addAttribute("enrollments", enrollments);
         model.addAttribute("searchValue", searchValue);
         model.addAttribute("status", status);
@@ -72,7 +74,7 @@ public class EnrollmentManagementController {
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("errMsg", "Có lỗi trong quá trình duyệt đăng ký");
         }
-        return "redirect:/enrollments/show-enrollments";
+        return "redirect:/admin/enrollments";
     }
 
     @GetMapping("/deny-enrollment/{id}")
@@ -97,6 +99,6 @@ public class EnrollmentManagementController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errMsg", "Có lỗi trong quá trình từ chối đăng ký");
         }
-        return "redirect:/enrollments/show-enrollments";
+        return "redirect:/admin/enrollments";
     }
 }

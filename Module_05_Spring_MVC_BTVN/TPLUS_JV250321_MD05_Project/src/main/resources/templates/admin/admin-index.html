@@ -2,27 +2,107 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<div class="toast" th:if="${successMsg}">
+    <p th:if="${successMsg}" th:text="${successMsg}" style="color: green"></p>
+</div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<!-- Include HEADER -->
+<div th:replace="fragments/admin-fragments :: header"></div>
 
-<main>
-    <h2>Khung chức năng</h2>
-    <nav>
-        <a th:href="@{/courses}">1. Quản lý khóa học</a><br>
-        <a th:href="@{/students}">2. Quản lý học viên</a><br>
-        <a th:href="@{/enrollments/show-enrollments}">3. Quản lý đăng ký khóa học</a><br>
-        <a th:href="@{/statistics}">4. Thống kê</a>
-    </nav>
-</main>
+<div class="dashboard-container">
+    <!-- Include SIDEBAR -->
+    <div th:replace="fragments/admin-fragments :: sidebar"></div>
 
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Stats Cards -->
+        <section class="stats-cards">
+            <div class="card">
+                <p>Tổng số học viên</p>
+                <h2 th:text="${allStudentsCount}">456</h2>
+                <span class="increase">+36%</span>
+            </div>
+            <div class="card">
+                <p>Tổng số khóa học</p>
+                <h2 th:text="${allCoursesCount}">56</h2>
+                <span class="increase">+36%</span>
+            </div>
+            <div class="card">
+                <p>Tổng số học viên đăng ký</p>
+                <h2 th:text="${enrolledStudentsCount}">325</h2>
+                <span class="increase">+36%</span>
+            </div>
+        </section>
 
+        <!-- Table + Top 5 -->
+        <section class="content-section">
+            <div class="left-table">
+                <h2>Tổng số học viên theo từng khóa</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Mã khóa học</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên khóa học</th>
+                        <th>Thời lượng (giờ)</th>
+                        <th>Tổng số học sinh</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="course : ${courseStatistics}">
+                        <td th:text="${course.courseId}"></td>
+                        <td><img th:src="@{${course.image}}" alt="Course" class="course-img"></td>
+                        <td th:text="${course.courseName}"></td>
+                        <td th:text="${course.duration}"></td>
+                        <td th:text="${course.studentCount}"></td>
+                    </tr>
+                    <tr th:if="${courseStatistics.content.size() == 0}">
+                        <td colspan="5" class="no-data">Không tìm thấy khóa học nào</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:if="${courseStatistics.content.size() > 0}" style="margin-top: 30px">
+                    <a th:if="${courseStatistics.hasPrevious()}"
+                       th:href="@{/admin/dashboard(page = ${courseStatistics.number - 1}, size=${courseStatistics.size})}"
+                       th:text="Prev"
+                       class="pagination">
+                    </a>
+
+                    <a th:each="pageNum : ${#numbers.sequence(0, courseStatistics.totalPages - 1)}"
+                       th:text="${pageNum + 1}"
+                       th:href="@{/admin/dashboard(page = ${pageNum}, size=${courseStatistics.size})}"
+                       th:styleappend="${pageNum == courseStatistics.number} ? 'background-color:red' : ''"
+                       class="pagination">
+                    </a>
+
+                    <a th:if="${courseStatistics.hasNext()}"
+                       th:href="@{/admin/dashboard(page = ${courseStatistics.number + 1}, size=${courseStatistics.size})}"
+                       class="pagination"
+                       th:text="Next">
+                    </a>
+                </div>
+            </div>
+
+            <div class="right-top5">
+                <h3>Top 5 khóa học đông sinh viên</h3>
+                <p>Top 5 courses with the most students</p>
+                <ul>
+                    <li th:each="course : ${top5Courses}">
+                        <img th:src="@{${course.image}}" alt="Course">
+                        <div class="course-info">
+                            <span th:text="${course.courseName}">Course Name</span>
+                            <small><span th:text="${course.studentCount}"></span> Students</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+<script th:src="@{/js/toast.js}"></script>
 </body>
 </html>

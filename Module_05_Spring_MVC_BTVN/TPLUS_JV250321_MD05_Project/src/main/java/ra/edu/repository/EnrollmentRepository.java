@@ -5,11 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import ra.edu.model.dto.CourseStatistics;
 import ra.edu.model.dto.StudentCountPerCourse;
 import ra.edu.model.entity.Enrollment;
 import ra.edu.model.entity.EnrollmentStatus;
-
-import java.util.List;
 
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
@@ -34,23 +33,35 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     Long countDistinctUserIdByStatus(EnrollmentStatus enrollmentStatus);
 
     @Query(
-            value = "select new ra.edu.model.dto.StudentCountPerCourse(e.course.name, count(e.user.id)) " +
-                    "from Enrollment e " +
-                    "where e.status = ra.edu.model.entity.EnrollmentStatus.CONFIRMED " +
-                    "group by e.course.name " +
-                    "order by e.course.name asc ",
-            countQuery = "select count (distinct e.course.id) " +
-                    "from Enrollment e " +
-                    "where e.status = ra.edu.model.entity.EnrollmentStatus.CONFIRMED"
+            value = "SELECT new ra.edu.model.dto.CourseStatistics(" +
+                    "c.id, " +
+                    "c.image, " +
+                    "c.name, " +
+                    "c.duration, " +
+                    "COUNT(e.user.id)) " +
+                    "FROM Enrollment e " +
+                    "JOIN e.course c " +
+                    "WHERE e.status = ra.edu.model.entity.EnrollmentStatus.CONFIRMED " +
+                    "GROUP BY c.id, c.image, c.name, c.duration " +
+                    "ORDER BY c.name ASC",
+            countQuery = "SELECT COUNT(DISTINCT c.id) " +
+                    "FROM Enrollment e " +
+                    "JOIN e.course c " +
+                    "WHERE e.status = ra.edu.model.entity.EnrollmentStatus.CONFIRMED"
     )
-    Page<StudentCountPerCourse> getStudentCountPerCourse(Pageable pageable);
+    Page<CourseStatistics> getStudentCountPerCourse(Pageable pageable);
+
 
     @Query(
-            "select new ra.edu.model.dto.StudentCountPerCourse(e.course.name, count(e.user.id)) " +
+            "select new ra.edu.model.dto.StudentCountPerCourse(e.course.image, e.course.name, count(e.user.id)) " +
                     "from Enrollment e " +
                     "where e.status = ra.edu.model.entity.EnrollmentStatus.CONFIRMED " +
                     "group by e.course.name " +
                     "order by count (e.user.id) desc "
     )
     Page<StudentCountPerCourse> getTop5CoursesMostEnrolled(Pageable pageable);
+
+    Page<Enrollment> findByUserIdAndStatus(Long userId, EnrollmentStatus status, Pageable pageable);
+
+    Page<Enrollment> findByUserIdAndCourseNameContainingAndStatus(Long userId, String courseName, EnrollmentStatus status, Pageable pageable);
 }

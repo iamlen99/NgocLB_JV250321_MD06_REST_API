@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER*/
+.header {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px 20px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    padding-left: 20px;
+}
+
+.header-left .logo {
+    width: 126px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-icons img {
+    width: 30px;
+}
+
+.header-icons .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #3F3F46;
+}
+
+.logout-btn:hover {
+    opacity: 0.8;
+    color: #2d6cdf;
+    font-weight: bold;
+}
+
+.logout-btn span {
+    font-size: 18px;
+}
+
+/* Menu */
+.menu {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.menu li {
+    padding: 12px;
+    color: #333;
+}
+
+.menu li a {
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+}
+
+.menu li.active {
+    background: #e0ecff;
+    border-radius: 8px;
+}
+
+.menu li.active a{
+    color: #2563eb;
+}

@@ -15,19 +15,15 @@ import ra.edu.service.UserService;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/students")
+@RequestMapping("/admin")
 public class StudentManagementController {
     @Autowired
     private StudentService studentService;
-    @Autowired
-    private UserService userService;
-//    @Autowired
-//    private CloudinaryService cloudinaryService;
 
-    @GetMapping
+    @GetMapping("/students")
     public String showStudents(
             @RequestParam(name = "page", defaultValue = "1") Integer page,
-            @RequestParam(name = "size", defaultValue = "5") Integer size,
+            @RequestParam(name = "size", defaultValue = "8") Integer size,
             @RequestParam(name = "searchValue", required = false) String searchValue,
             @RequestParam(name = "sortBy", required = false) String sortBy,
             Model model,
@@ -52,7 +48,7 @@ public class StudentManagementController {
         return "admin/student/student-list";
     }
 
-    @GetMapping("/change-status/{id}")
+    @GetMapping("/change-student-status/{id}")
     public String changeStatus(
             @PathVariable("id") Long id,
             RedirectAttributes redirectAttributes,
@@ -72,6 +68,6 @@ public class StudentManagementController {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errMsg", "Có lỗi trong quá trình cập nhật: " + e.getMessage());
         }
-        return "redirect:/students";
+        return "redirect:/admin/students";
     }
 }

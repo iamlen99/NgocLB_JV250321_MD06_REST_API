@@ -2,108 +2,128 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Post</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+    <title>Course Manager</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/toast-2.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<div class="toast" th:if="${successMsg} or ${errMsg}">
+    <p th:if="${successMsg}" th:text="${successMsg}" style="color: green"></p>
+    <p th:if="${errMsg}" th:text="${errMsg}" style="color: red"></p>
+</div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<!-- HEADER -->
+<div th:replace="fragments/admin-fragments :: header"></div>
 
-<main>
-    <p th:text="${successMsg}" style="color: green"></p>
-    <p th:text="${errMsg}" style="color: red"></p>
-    <h2>Danh sách học viên</h2>
+<div class="dashboard-layout">
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/admin-fragments :: sidebar"></div>
 
-    <div class="search-container">
-        <form th:action="@{/students(page = ${pageNum})}" method="get">
-            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm học viên">
-            <button type="submit" style="cursor: pointer">Tìm kiếm</button>
-        </form>
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-content">
+        <!-- Title-->
+        <div class="page-header">
+            <h2>Quản lý học viên</h2>
+        </div>
 
-        <select name="sortBy" onchange="sortCourse(this)">
-            <option th:value="@{/students(sortBy = null, searchValue = ${searchValue})}" style="text-align: center"
-                    th:selected="${sortBy == null}">
-                ----- Sắp xếp học viên -----
-            </option>
-            <option th:value="@{/students(sortBy = 'nameASC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'nameASC'}">
-                Theo tên học viên tăng dần
-            </option>
-            <option th:value="@{/students(sortBy = 'nameDESC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'nameDESC'}">
-                Theo tên học viên giảm dần
-            </option>
-            <option th:value="@{/students(sortBy = 'idASC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'idASC'}">
-                Theo mã học viên tăng dần
-            </option>
-            <option th:value="@{/students(sortBy = 'idDESC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'idDESC'}">
-                Theo mã học viên giảm dần
-            </option>
-        </select>
-    </div>
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <select name="sortBy" onchange="sortCourse(this)" class="filter-select">
+                <option th:value="@{/admin/students(sortBy = null, searchValue = ${searchValue})}"
+                        style="text-align: center"
+                        th:selected="${sortBy == null}">
+                    ----- Sắp xếp học viên -----
+                </option>
+                <option th:value="@{/admin/students(sortBy = 'nameASC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'nameASC'}">
+                    Theo tên học viên tăng dần
+                </option>
+                <option th:value="@{/admin/students(sortBy = 'nameDESC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'nameDESC'}">
+                    Theo tên học viên giảm dần
+                </option>
+                <option th:value="@{/admin/students(sortBy = 'idASC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'idASC'}">
+                    Theo mã học viên tăng dần
+                </option>
+                <option th:value="@{/admin/students(sortBy = 'idDESC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'idDESC'}">
+                    Theo mã học viên giảm dần
+                </option>
+            </select>
 
-    <table style="margin-top: 20px">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên học viên</th>
-            <th>Ngày sinh</th>
-            <th>Email</th>
-            <th>Giới tính</th>
-            <th>Số điện thoại</th>
-            <th>Ngày thêm</th>
-            <th>Trạng thái</th>
-            <th>Hoạt động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.id}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${#temporals.format(student.dob, 'dd/MM/yyyy')}"></td>
-            <td th:text="${student.email}"></td>
-            <td th:text="${student.sex ? 'Nam' : 'Nữ'}"></td>
-            <td th:text="${student.phone}"></td>
-            <td th:text="${#temporals.format(student.createAt, 'dd/MM/yyyy')}"></td>
-            <td th:text="${student.status ? 'Đang hoạt động' : 'Đã khóa'}"></td>
-            <td>
-                <a th:href="@{/students/change-status/{id}(id=${student.id})}">Change</a>
-            </td>
-        </tr>
-        <tr th:if="${students.content.size() == 0}">
-            <td colspan="7" style="padding:14px;text-align:center;color:#666;">Không tìm thấy học viên nào</td>
-        </tr>
-        </tbody>
-    </table>
+            <form th:action="@{/admin/students(page = ${pageNum})}" method="get" class="search-form">
+                <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm học viên">
+                <button type="submit" style="cursor: pointer">Tìm kiếm</button>
+            </form>
+        </div>
 
-    <div th:if="${students.content.size() > 0}">
-        <a th:if="${students.hasPrevious()}"
-           th:href="@{/students(page = ${students.number}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           th:text="Prev"
-           class="pagination">
-        </a>
+        <!-- Table -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên học viên</th>
+                    <th>Ngày sinh</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày thêm</th>
+                    <th>Trạng thái</th>
+                    <th>Hoạt động</th>
+                </tr>
+                </thead>
 
-        <a th:each="pageNum : ${#numbers.sequence(1, students.totalPages)}"
-           th:text="${pageNum}"
-           th:href="@{/students(page = ${pageNum}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           th:styleappend="${pageNum == students.number + 1} ? 'background-color:red' : ''"
-           class="pagination">
-        </a>
+                <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${#temporals.format(student.dob, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${student.email}"></td>
+                    <td th:text="${student.sex ? 'Nam' : 'Nữ'}"></td>
+                    <td th:text="${student.phone}"></td>
+                    <td th:text="${#temporals.format(student.createAt, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${student.status ? 'Active' : 'InActive'}"
+                        th:classappend="${student.status} ? 'active-status' : 'in-active-status'">
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/change-student-status/{id}(id=${student.id})}"
+                           th:text="${student.status ? 'Lock' : 'UnLock'}"
+                           class="action"
+                           th:classappend="${student.status} ? 'lock-action' : 'unlock-action'">
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${students.content.size() == 0}">
+                    <td colspan="7" style="padding:14px;text-align:center;color:#666;">Không tìm thấy học viên nào</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <a th:if="${students.hasNext()}"
-           th:href="@{/students(page = ${students.number + 2}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           class="pagination"
-           th:text="Next">
-        </a>
-    </div>
-</main>
+        <!-- Pagination -->
+        <div class="pagination-wrapper" th:if="${students.content.size() > 0}">
+            <a th:if="${students.hasPrevious()}"
+               th:href="@{/admin/students(page = ${students.number}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
+               th:text="Prev">
+            </a>
 
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+            <a th:each="pageNum : ${#numbers.sequence(1, students.totalPages)}"
+               th:text="${pageNum}"
+               th:href="@{/admin/students(page = ${pageNum}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
+               th:classappend="${pageNum == students.number + 1} ? 'active' : ''">
+            </a>
+
+            <a th:if="${students.hasNext()}"
+               th:href="@{/admin/students(page = ${students.number + 2}, size=${students.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
+               th:text="Next">
+            </a>
+        </div>
+    </main>
+</div>
+
+<script th:src="@{/js/toast.js}"></script>
 <script>
     function sortCourse(select) {
         window.location.href = select.value;

@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f7f8fa;
+    color: #333;
+}
+
+.student-form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px;
+}
+
+/* Layout */
+.dashboard-layout {
+    margin-top: 80px;
+}
+
+/* Container */
+.student-form-container {
+    width: 100%;
+    max-width: 650px;
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    margin: 0 auto;
+}
+
+/* Title */
+.student-form-title {
+    color: #1a202c;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.change-password-btn {
+    position: absolute;
+    right: 0;
+    background: #3182ce;
+    color: white;
+    padding: 12px 26px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.change-password-btn:hover {
+    background: #2b6cb0;
+}
+
+/* Form */
+.student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.student-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label */
+.student-form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3748;
+    font-size: 16px;
+}
+
+/* Input */
+.student-form-input {
+    padding: 10px 14px;
+    border: 1px solid #cbd5e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.student-form-input:focus {
+    border-color: #3182ce;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+/* Error message */
+.student-form-error {
+    color: #e53e3e;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.global-error {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* Date input wrapper */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 10px;
+    padding: 0 12px;
+    height: 44px;
+    transition: border 0.2s;
+}
+
+.input-wrapper:focus-within {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+.input-wrapper .icon img {
+    width: 18px;
+    margin-right: 8px;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+/* Actions */
+.student-form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.student-form-button {
+    background: #3182ce;
+    color: white;
+    padding: 12px 26px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.student-form-button:hover {
+    background: #2b6cb0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .student-form-container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .student-form-title {
+        font-size: 22px;
+    }
+}
+
+/*Change Password*/
+/* Modal nền */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Khung modal */
+.modal-content {
+    background: white;
+    width: 400px;
+    margin: 10% auto;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Nút X đóng */
+.close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.password-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.password-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.password-form input {
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancel-btn {
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #c53030;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #9b2c2c;
+}

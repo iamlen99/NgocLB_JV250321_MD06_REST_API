@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<body>
+<!-- HEADER + SIDEBAR -->
+<header class="header" th:fragment="header">
+    <link rel="stylesheet" th:href="@{/css/student-fragments.css}">
+    <div class="header-left">
+        <img src="/images/rikkei-logo.png" alt="rikkei-logo" class="logo">
+    </div>
+
+    <ul class="menu">
+        <li th:classappend="${#strings.startsWith(currentPath, '/student/courses')} ? 'active'">
+            <a th:href="@{/student/courses}">List Courses</a>
+        </li>
+        <li th:classappend="${#strings.startsWith(currentPath, '/student/enrollments')} ? 'active'">
+            <a th:href="@{/student/enrollments}">Enrollments</a>
+        </li>
+        <li th:classappend="${#strings.startsWith(currentPath, '/student/edit-student')} ? 'active'">
+            <a th:href="@{/student/edit-student}">Profile</a>
+        </li>
+    </ul>
+
+    <div class="header-icons">
+        <img src="/images/mail-icon.png" alt="mail-icon">
+        <img src="/images/bell-icon.png" alt="bell-icon">
+        <img src="/images/temple-avatar.png" alt="user-image" class="avatar">
+        <a th:href="@{/users/login}" class="logout-btn">
+            <img src="/images/logout-icon.png" alt="logout-icon">
+            <span>Logout</span>
+        </a>
+    </div>
+</header>
+
+</body>
+</html>

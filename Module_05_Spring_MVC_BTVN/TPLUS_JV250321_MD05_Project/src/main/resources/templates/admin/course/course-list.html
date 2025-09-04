@@ -2,115 +2,125 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Post</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+    <title>Course Manager</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/toast-2.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<div class="toast" th:if="${successMsg} or ${errMsg}">
+    <p th:if="${successMsg}" th:text="${successMsg}" style="color: green"></p>
+    <p th:if="${errMsg}" th:text="${errMsg}" style="color: red"></p>
+</div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<!-- HEADER -->
+<div th:replace="fragments/admin-fragments :: header"></div>
 
-<main>
-    <p th:text="${successMsg}" style="color: green"></p>
-    <p th:text="${errMsg}" style="color: red"></p>
-    <h2>Danh sách khóa học</h2>
+<div class="dashboard-layout">
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/admin-fragments :: sidebar"></div>
 
-    <div class="search-container">
-        <form th:action="@{/courses(page = ${pageNum})}" method="get">
-            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
-            <button type="submit" style="cursor: pointer">Tìm kiếm</button>
-        </form>
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-content">
+        <!-- Title + Add -->
+        <div class="page-header">
+            <h2>Quản lý khóa học</h2>
+            <a th:href="@{/admin/courses/add-course}" class="btn-primary">Thêm mới khóa học</a>
+        </div>
 
-        <select name="sortBy" onchange="sortCourse(this)">
-            <option th:value="@{/courses(sortBy = null, searchValue = ${searchValue})}" style="text-align: center"
-                    th:selected="${sortBy == null}">
-                ----- Sắp xếp khóa học -----
-            </option>
-            <option th:value="@{/courses(sortBy = 'nameASC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'nameASC'}">
-                Theo tên khóa học tăng dần
-            </option>
-            <option th:value="@{/courses(sortBy = 'nameDESC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'nameDESC'}">
-                Theo tên khóa học giảm dần
-            </option>
-            <option th:value="@{/courses(sortBy = 'idASC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'idASC'}">
-                Theo mã khóa học tăng dần
-            </option>
-            <option th:value="@{/courses(sortBy = 'idDESC', searchValue = ${searchValue})}"
-                    th:selected="${sortBy == 'idDESC'}">
-                Theo mã khóa học giảm dần
-            </option>
-        </select>
-    </div>
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <select name="sortBy" onchange="sortCourse(this)" class="filter-select">
+                <option th:value="@{/admin/courses(sortBy = null, searchValue = ${searchValue})}"
+                        style="text-align: center"
+                        th:selected="${sortBy == null}">
+                    ----- Sắp xếp khóa học -----
+                </option>
+                <option th:value="@{/admin/courses(sortBy = 'nameASC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'nameASC'}">
+                    Theo tên khóa học tăng dần
+                </option>
+                <option th:value="@{/admin/courses(sortBy = 'nameDESC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'nameDESC'}">
+                    Theo tên khóa học giảm dần
+                </option>
+                <option th:value="@{/admin/courses(sortBy = 'idASC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'idASC'}">
+                    Theo mã khóa học tăng dần
+                </option>
+                <option th:value="@{/admin/courses(sortBy = 'idDESC', searchValue = ${searchValue})}"
+                        th:selected="${sortBy == 'idDESC'}">
+                    Theo mã khóa học giảm dần
+                </option>
+            </select>
 
-    <div class="add-btn">
-        <a th:href="@{/courses/add}">Thêm khóa học</a>
-    </div>
+            <form th:action="@{/admin/courses(page=${pageNum})}" method="get" class="search-form">
+                <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên khóa học</th>
-            <th>Hình ảnh</th>
-            <th>Thời lượng</th>
-            <th>Giảng viên phụ trách</th>
-            <th>Ngày thêm</th>
-            <th>Hoạt động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="course : ${courses}">
-            <td th:text="${course.id}"></td>
-            <td th:text="${course.name}"></td>
-            <td>
-                <img th:if="${course.image != null}" th:src="@{${course.image}}" style="width:100px;height:100px;"
-                     alt="Ảnh khóa học">
-                <span th:if="${course.image == null}">Không có ảnh</span>
-            </td>
-            <td th:text="${course.duration}"></td>
-            <td th:text="${course.instructor}"></td>
-            <td th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></td>
-            <td>
-                <a th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a>
-                <a th:href="@{/courses/delete/{id}(id=${course.id})}"
-                   onclick="return confirm('Bạn có chắc chắn muốn xóa khóa học này không?')"
-                >Delete</a>
-            </td>
-        </tr>
-        <tr th:if="${courses.content.size() == 0}">
-            <td colspan="7" style="padding:14px;text-align:center;color:#666;">Không tìm thấy khóa học nào</td>
-        </tr>
-        </tbody>
-    </table>
+        <!-- Table -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Duration (Hour)</th>
+                    <th>Instructor</th>
+                    <th>Image</th>
+                    <th>Created Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.id}" style="text-align: center"></td>
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.duration}" style="text-align: center"></td>
+                    <td th:text="${course.instructor}"></td>
+                    <td>
+                        <img th:if="${course.image != null}" th:src="@{${course.image}}" alt="Course image">
+                        <span th:if="${course.image == null}">No image</span>
+                    </td>
+                    <td th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></td>
+                    <td class="actions">
+                        <a th:href="@{/admin/courses/delete-course/{id}(id=${course.id})}" class="delete"
+                           onclick="return confirm('Delete this course?')">
+                            <img src="/images/delete-button.png" alt="delete-btn" style="width: 25px">
+                        </a>
+                        <a th:href="@{/admin/courses/edit-course/{id}(id=${course.id})}" class="edit">
+                            <img src="/images/edit-button.png" alt="edit-btn" style="width: 25px">
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${courses.content.size() == 0}">
+                    <td colspan="7" style="padding:14px;text-align:center;color:#666;">Không tìm thấy khóa học nào</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div th:if="${courses.content.size() > 0}">
-        <a th:if="${courses.hasPrevious()}"
-           th:href="@{/courses(page = ${courses.number - 1}, size=${courses.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           th:text="Prev"
-           class="pagination">
-        </a>
+        <!-- Pagination -->
+        <div class="pagination-wrapper" th:if="${courses.totalPages > 1}">
+            <a th:if="${courses.hasPrevious()}"
+               th:href="@{/admin/courses(page=${courses.number - 1}, size=${courses.size}, searchValue=${searchValue}, sortBy=${sortBy})}">
+                <img src="/images/arrow-left.png" alt="arrow-left" style="width: 13px;">
+            </a>
 
-        <a th:each="pageNum : ${#numbers.sequence(0, courses.totalPages - 1)}"
-           th:text="${pageNum + 1}"
-           th:href="@{/courses(page = ${pageNum}, size=${courses.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           th:styleappend="${pageNum == courses.number} ? 'background-color:red' : ''"
-           class="pagination">
-        </a>
+            <a th:each="pageNum : ${#numbers.sequence(0, courses.totalPages - 1)}"
+               th:text="${pageNum + 1}"
+               th:href="@{/admin/courses(page=${pageNum}, size=${courses.size}, searchValue=${searchValue}, sortBy=${sortBy})}"
+               th:classappend="${pageNum == courses.number} ? 'active' : ''"></a>
 
-        <a th:if="${courses.hasNext()}"
-           th:href="@{/courses(page = ${courses.number + 1}, size=${courses.size}, searchValue=${searchValue}, sortBy = ${sortBy})}"
-           class="pagination"
-           th:text="Next">
-        </a>
-    </div>
-</main>
-
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+            <a th:if="${courses.hasNext()}"
+               th:href="@{/admin/courses(page=${courses.number + 1}, size=${courses.size}, searchValue=${searchValue}, sortBy=${sortBy})}">
+                <img src="/images/arrow-right.png" alt="arrow-right" style="width: 13px;">
+            </a>
+        </div>
+    </main>
+</div>
+<script th:src="@{/js/toast.js}"></script>
 <script>
     function sortCourse(select) {
         window.location.href = select.value;

@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentCountPerCourse {
+    private String image;
     private String courseName;
     private Long studentCount;
 }

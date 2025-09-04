@@ -2,61 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
-    <style>
-        td {
-            vertical-align: top;
-        }
-    </style>
+    <title>Course Manager</title>
+    <link rel="stylesheet" th:href="@{/css/course-add-update.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<!-- HEADER -->
+<div th:replace="fragments/admin-fragments :: header"></div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<div class="dashboard-layout">
+    <!-- SIDEBAR -->
+    <div th:replace="fragments/admin-fragments :: sidebar"></div>
 
-<main style="max-width:1100px;margin:24px auto;padding:0 12px;">
-    <h2 style="color:#1a202c;margin-bottom:12px;">Cập nhật thông tin khóa học</h2>
-    <p th:text="${errMsg}" style="color: red"></p>
+    <!-- MAIN CONTENT -->
+    <main class="course-form-container">
+        <h2 class="course-form-title">Cập nhật thông tin khóa học</h2>
 
-    <form th:action="@{/courses/update}" th:object="${courseEdit}" method="post" enctype="multipart/form-data">
-        <table>
+        <p th:text="${errMsg}" class="course-form-error"></p>
+
+        <form th:action="@{/admin/courses/update-course}" th:object="${courseEdit}" method="post" enctype="multipart/form-data" class="course-form">
             <input type="hidden" th:field="*{id}"/>
-            <tr>
-                <td>Tên khóa học:</td>
-                <td>
-                    <input type="text" th:field="*{name}">
-                    <p th:errors="*{name}" style="color:red;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Thời lượng:</td>
-                <td>
-                    <input type="text" th:field="*{duration}">
-                    <p th:errors="*{duration}" style="color:red;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Giảng viên phụ trách:</td>
-                <td>
-                    <input type="text" th:field="*{instructor}">
-                    <p th:errors="*{instructor}" style="color:red;"></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Hình ảnh:</td>
-                <td>
-                    <input type="file" th:field="*{file}">
-                    <p th:errors="*{file}" style="color:red;"></p>
-                </td>
-            </tr>
-        </table>
-        <button type="submit">Cập nhật</button>
-    </form>
-</main>
+            <div class="course-form-group">
+                <label for="name" class="course-form-label">Tên khóa học:</label>
+                <input type="text" th:field="*{name}" id="name" class="course-form-input">
+                <p th:errors="*{name}" class="course-form-error"></p>
+            </div>
 
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+            <div class="course-form-group">
+                <label for="duration" class="course-form-label">Thời lượng:</label>
+                <input type="text" th:field="*{duration}" id="duration" class="course-form-input">
+                <p th:errors="*{duration}" class="course-form-error"></p>
+            </div>
 
+            <div class="course-form-group">
+                <label for="instructor" class="course-form-label">Giảng viên phụ trách:</label>
+                <input type="text" th:field="*{instructor}" id="instructor" class="course-form-input">
+                <p th:errors="*{instructor}" class="course-form-error"></p>
+            </div>
+
+            <div class="course-form-group">
+                <label for="file" class="course-form-label">Hình ảnh:</label>
+                <input type="file" th:field="*{file}" id="file" class="course-form-input">
+                <p th:errors="*{file}" class="course-form-error"></p>
+            </div>
+
+            <div class="course-form-actions">
+                <button type="submit" class="course-form-button">Cập nhật</button>
+                <a th:href="@{/admin/courses}" class="course-form-button">Quay lại</a>
+            </div>
+        </form>
+    </main>
+</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ra.edu.model.dto.CourseStatistics;
 import ra.edu.model.dto.StudentCountPerCourse;
 import ra.edu.model.entity.*;
 import ra.edu.repository.CourseRepository;
@@ -45,7 +46,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Page<StudentCountPerCourse> getStudentCountPerCourse(Integer page, Integer size) {
+    public Page<CourseStatistics> getStudentCountPerCourse(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return enrollmentRepository.getStudentCountPerCourse(pageable);
     }

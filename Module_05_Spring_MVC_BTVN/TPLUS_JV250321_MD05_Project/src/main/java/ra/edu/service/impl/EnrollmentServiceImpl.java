@@ -36,15 +36,22 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Page<Enrollment> getEnrollmentByStudentId(Long studentId, Integer page, Integer size) {
+    public Page<Enrollment> getEnrollmentByStudentIdAndStatus(Long studentId, Integer page, Integer size, EnrollmentStatus status) {
         Pageable pageable = PageRequest.of(page, size);
-        return enrollmentRepository.findByUserId(studentId, pageable);
+        if (status == null) {
+            return enrollmentRepository.findByUserId(studentId, pageable);
+        }
+        return enrollmentRepository.findByUserIdAndStatus(studentId, status, pageable);
     }
 
     @Override
-    public Page<Enrollment> getEnrollmentByStudentIdAndSearchValue(Long studentId, Integer page, Integer size, String searchValue) {
+    public Page<Enrollment> getEnrollmentByStudentIdAndSearchValueAndStatus(Long studentId, Integer page, Integer size,
+                                                                            String searchValue, EnrollmentStatus status) {
         Pageable pageable = PageRequest.of(page, size);
-        return enrollmentRepository.findByUserIdAndCourseNameContaining(studentId, searchValue, pageable);
+        if(status == null) {
+            return enrollmentRepository.findByUserIdAndCourseNameContaining(studentId, searchValue, pageable);
+        }
+        return enrollmentRepository.findByUserIdAndCourseNameContainingAndStatus(studentId, searchValue, status, pageable);
     }
 
     @Override

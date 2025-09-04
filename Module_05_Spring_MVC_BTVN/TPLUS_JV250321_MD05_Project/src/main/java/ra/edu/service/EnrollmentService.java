@@ -11,8 +11,9 @@ import java.util.Optional;
 public interface EnrollmentService {
     Enrollment saveEnrollment(Enrollment enrollment);
     Enrollment getEnrollmentByCourseIdAndStudentId(Long courseId, Long studentId);
-    Page<Enrollment> getEnrollmentByStudentId(Long studentId, Integer page, Integer size);
-    Page<Enrollment> getEnrollmentByStudentIdAndSearchValue(Long studentId, Integer page, Integer size, String searchValue);
+    Page<Enrollment> getEnrollmentByStudentIdAndStatus(Long studentId, Integer page, Integer size, EnrollmentStatus status);
+    Page<Enrollment> getEnrollmentByStudentIdAndSearchValueAndStatus(Long studentId, Integer page, Integer size
+            , String searchValue, EnrollmentStatus status);
     Page<Enrollment> getAllEnrollments(Integer page, Integer size, EnrollmentStatus status);
     Page<Enrollment> getEnrollmentsByCourseName(Integer page, Integer size, String searchValue, EnrollmentStatus status);
 

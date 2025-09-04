@@ -3,6 +3,7 @@ package ra.edu.controller;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +20,14 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/courses")
+@RequestMapping("/admin")
 public class CourseManagementController {
     @Autowired
     private CourseService courseService;
     @Autowired
     private CloudinaryService cloudinaryService;
 
-    @GetMapping
+    @GetMapping("/courses")
     public String showCourses(
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "size", defaultValue = "5") Integer size,
@@ -54,7 +55,7 @@ public class CourseManagementController {
         return "admin/course/course-list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/courses/add-course")
     public String showAddForm(
             Model model,
             HttpSession session,
@@ -69,7 +70,7 @@ public class CourseManagementController {
         return "admin/course/add-course";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/courses/add-course")
     public String addCourse(
             @Valid @ModelAttribute("courseAdd") CourseDTO courseAdd,
             BindingResult result,
@@ -107,7 +108,7 @@ public class CourseManagementController {
         try {
             courseService.save(newCourse);
             redirectAttributes.addFlashAttribute("successMsg", "Thêm khóa học thành công");
-            return "redirect:/courses";
+            return "redirect:/admin/courses";
         } catch (RuntimeException e) {
             e.printStackTrace();
             model.addAttribute("errMsg", "Có lỗi khi thêm khóa học, xin thử lại");
@@ -115,7 +116,7 @@ public class CourseManagementController {
         }
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/courses/edit-course/{id}")
     public String showEditForm(
             @PathVariable("id") Long id,
             Model model,
@@ -140,10 +141,10 @@ public class CourseManagementController {
             return "admin/course/edit-course";
         }
         redirectAttributes.addFlashAttribute("errMsg", "Có lỗi khi lấy id khóa học, xin thử lại");
-        return "redirect:/courses";
+        return "redirect:/admin/courses";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/courses/update-course")
     public String updateCourse(
             @Valid @ModelAttribute("courseEdit") CourseDTO courseEdit,
             BindingResult result,
@@ -157,7 +158,7 @@ public class CourseManagementController {
         Optional<Course> courseOptional = courseService.findCourseById(courseEdit.getId());
         if (courseOptional.isEmpty()) {
             redirectAttributes.addFlashAttribute("errMsg", "Có lỗi khi lấy id khóa học, xin thử lại");
-            return "redirect:/courses";
+            return "redirect:/admin/courses";
         }
 
         if (!courseOptional.get().getName().equals(courseEdit.getName()) &&
@@ -191,7 +192,7 @@ public class CourseManagementController {
         try {
             courseService.save(updatedCourse);
             redirectAttributes.addFlashAttribute("successMsg", "Cập nhật thông tin khóa học thành công");
-            return "redirect:/courses";
+            return "redirect:/admin/courses";
         } catch (RuntimeException e) {
             e.printStackTrace();
             model.addAttribute("errMsg", "Có lỗi khi cập nhật thông tin khóa học, xin thử lại");
@@ -199,7 +200,7 @@ public class CourseManagementController {
         }
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/courses/delete-course/{id}")
     public String deleteCourse(
             @PathVariable("id") Long id,
             RedirectAttributes redirectAttributes,
@@ -211,11 +212,15 @@ public class CourseManagementController {
             return "redirect:/users/login";
         }
 
-        if (courseService.deleteCourseById(id)) {
+        try {
+            courseService.deleteCourseById(id);
             redirectAttributes.addFlashAttribute("successMsg", "Xóa khóa học thành công");
-        } else {
-            redirectAttributes.addFlashAttribute("errMsg", "Có lỗi khi lấy id khóa học, xin thử lại");
+        } catch (DataIntegrityViolationException e) {
+            // lỗi FK (còn enrollments)
+            redirectAttributes.addFlashAttribute("errMsg", "Không thể xóa khóa học vì đang có học viên đăng ký");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errMsg", "Có lỗi xảy ra khi xóa khóa học, vui lòng thử lại");
         }
-        return "redirect:/courses";
+        return "redirect:/admin/courses";
     }
 }

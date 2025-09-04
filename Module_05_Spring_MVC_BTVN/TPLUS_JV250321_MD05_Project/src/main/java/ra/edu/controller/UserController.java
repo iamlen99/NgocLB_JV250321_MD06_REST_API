@@ -20,7 +20,7 @@ import ra.edu.service.UserService;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping(value = {"/","/users"})
 public class UserController {
     @Autowired
     private UserService userService;
@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("userRegister", new UserRegister());
-        return "public/register";
+        return "auth/register";
     }
 
     @PostMapping("/register")
@@ -39,24 +39,23 @@ public class UserController {
             Model model
     ) {
         if (result.hasErrors()) {
-            return "public/register";
+            return "auth/register";
         }
 
         if (userService.isExistEmail(userRegister.getEmail())) {
             result.rejectValue("email", "err.email", "Email đã tồn tại");
-            return "public/register";
+            return "auth/register";
         }
 
         if (userService.isExistPhone(userRegister.getPhone())) {
             result.rejectValue("phone", "err.phone", "Số điện thoại đã tồn tại");
-            return "public/register";
+            return "auth/register";
         }
 
         if (!userRegister.getPassword().equals(userRegister.getConfirmPassword())) {
             result.rejectValue("confirmPassword", "err.confirmPassword", "Mật khẩu xác nhận không trùng khớp");
-            return "public/register";
+            return "auth/register";
         }
-        ;
 
         try {
             User savedUser = userService.save(userRegister.toEntity());
@@ -64,14 +63,14 @@ public class UserController {
             return "redirect:/users/login";
         } catch (RuntimeException e) {
             model.addAttribute("errMsg", "Có lỗi trong quá trình đăng kí, xin thử lại");
-            return "public/register";
+            return "auth/register";
         }
     }
 
-    @GetMapping("/login")
+    @GetMapping(value = {"/","/login"})
     public String showLoginForm(Model model) {
         model.addAttribute("userLogin", new UserLogin());
-        return "public/login";
+        return "auth/login";
     }
 
     @PostMapping("/login")
@@ -83,7 +82,7 @@ public class UserController {
             HttpSession session
     ) {
         if (result.hasErrors()) {
-            return "public/login";
+            return "auth/login";
         }
 
         Optional<User> userOptional = userService.login(userLogin.getEmail(), userLogin.getPassword());
@@ -93,17 +92,17 @@ public class UserController {
             session.setAttribute("loggedUser", loggedUser);
             redirectAttributes.addFlashAttribute("successMsg", "Đăng nhập thành công");
             if (Role.ADMIN.equals(loggedUser.getRole())) {
-                return "admin/admin-index";
+                return "redirect:/admin/dashboard";
             }
-            return "student/student-index";
+            return "redirect:/student/courses";
         }
         model.addAttribute("errMsg", "Tài khoản hoặc mật khẩu không chính xác");
-        return "public/login";
+        return "auth/login";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "public/index";
+        return "index";
     }
 }

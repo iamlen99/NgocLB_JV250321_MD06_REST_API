@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<body>
+<!-- HEADER + SIDEBAR -->
+<header class="header" th:fragment="header">
+    <link rel="stylesheet" th:href="@{/css/admin-fragments.css}">
+    <div class="header-left">
+        <img src="/images/rikkei-logo.png" alt="rikkei-logo" class="logo">
+    </div>
+
+    <div class="header-search">
+        <input type="text" placeholder="Nhập để tìm kiếm...">
+        <img src="/images/search-icon.png" alt="search-icon" class="search-icon">
+    </div>
+
+    <div class="header-icons">
+        <img src="/images/mail-icon.png" alt="mail-icon">
+        <img src="/images/bell-icon.png" alt="bell-icon">
+        <img src="/images/temple-avatar.png" alt="user-image" class="avatar">
+        <a th:href="@{/users/login}" class="logout-btn">
+            <img src="/images/logout-icon.png" alt="logout-icon">
+            <span>Logout</span>
+        </a>
+    </div>
+</header>
+
+<aside class="sidebar" th:fragment="sidebar">
+    <ul class="menu">
+        <li th:classappend="${#strings.startsWith(currentPath, '/admin/dashboard')} ? 'active'">
+            <a th:href="@{/admin/dashboard}">
+                <img src="/images/home-icon.png" alt="home-icon">
+                Dashboard
+            </a>
+        </li>
+        <li th:classappend="${#strings.startsWith(currentPath, '/admin/students')} ? 'active'">
+            <a th:href="@{/admin/students}">
+                <img src="/images/users-icon.png" alt="student-icon">
+                Quản lý học viên
+            </a>
+        </li>
+        <li th:classappend="${#strings.startsWith(currentPath, '/admin/courses')} ? 'active'">
+            <a th:href="@{/admin/courses}">
+                <img src="/images/book-opened.png" alt="book-opened-icon">
+                Quản lý khóa học
+            </a>
+        </li>
+        <li th:classappend="${#strings.startsWith(currentPath, '/admin/enrollments')} ? 'active'">
+            <a th:href="@{/admin/enrollments}">
+                <img src="/images/person-add.png" alt="enrollment-icon">
+                Quản lý đăng ký học
+            </a>
+        </li>
+    </ul>
+
+</aside>
+
+</body>
+</html>

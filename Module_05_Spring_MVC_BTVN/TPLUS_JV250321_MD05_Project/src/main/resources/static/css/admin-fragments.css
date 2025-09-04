@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER*/
+.header {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    gap: 120px;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    padding-left: 20px;
+}
+
+.header-left .logo {
+    width: 126px;
+}
+
+.header-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header-search input {
+    width: 850px;
+    height: 50px;
+    padding: 10px 10px 10px 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.header-search .search-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-icons img {
+    width: 30px;
+}
+
+.header-icons .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #3F3F46;
+}
+
+.logout-btn:hover {
+    opacity: 0.8;
+    color: #2d6cdf;
+    font-weight: bold;
+}
+
+.logout-btn span {
+    font-size: 18px;
+}
+
+/* Sidebar */
+.sidebar {
+    top: 80px;
+    left: 0;
+    width: 270px;
+    background: #fff;
+    height: calc(100vh - 80px);
+    padding: 40px 20px 20px 20px;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu img{
+    width: 25px;
+}
+
+.sidebar .menu li {
+    padding: 12px;
+    color: #333;
+}
+
+.sidebar .menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar .menu li.active {
+    background: #e0ecff;
+    border-radius: 8px;
+}
+
+.sidebar .menu li.active a{
+    color: #2563eb;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="logo"><img th:src="@{/images/rikkei-logo.png}" alt="rikkei-logo"></div>
+    <div class="login-box">
+        <div class="left-panel" style="margin-top: 10px;">
+            <h2>Đăng ký tài khoản</h2>
+            <form th:action="@{/users/register}" th:object="${userRegister}" method="post">
+                <div class="form-group floating">
+                    <input type="text" th:field="*{name}" placeholder="Nhập họ tên">
+                    <label>Họ tên</label>
+                    <p th:errors="*{name}" class="error"></p>
+                </div>
+                <div class="form-row">
+                    <!-- Ngày sinh -->
+                    <div class="form-group floating birthday">
+                        <div class="input-wrapper">
+                            <span class="icon"><img th:src="@{/images/date-icon.png}" alt="date"></span>
+                            <input type="text" id="dob" placeholder="Nhập ngày sinh" readonly th:field="*{dob}">
+                        </div>
+                        <p th:errors="*{dob}" class="error"></p>
+                    </div>
+                    <!-- Giới tính -->
+                    <div class="form-group floating gender">
+                        <select th:field="*{sex}">
+                            <option value="">Chọn giới tính</option>
+                            <option value="true">Nam</option>
+                            <option value="false">Nữ</option>
+                        </select>
+                        <p th:errors="*{sex}" class="error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group floating">
+                    <input type="text" th:field="*{email}" placeholder="Nhập email">
+                    <label>Email</label>
+                    <p th:errors="*{email}" class="error"></p>
+                </div>
+                <div class="form-group floating">
+                    <input type="text" th:field="*{phone}" placeholder="Nhập số điện thoại">
+                    <label>Số điện thoại</label>
+                    <p th:errors="*{phone}" class="error"></p>
+                </div>
+                <div class="form-group floating password-field">
+                    <input type="password" th:field="*{password}" placeholder="Nhập mật khẩu">
+                    <label>Mật khẩu</label>
+                    <span class="toggle-password">
+                        <img th:src="@{/images/eye.png}" alt="eye" style="width: 18px">
+                    </span>
+                </div>
+                <p th:errors="*{password}" class="error"></p>
+                <div class="form-group floating password-field">
+                    <input type="password" th:field="*{confirmPassword}" placeholder="Xác nhận mật khẩu">
+                    <label>Mật khẩu xác nhận</label>
+                    <span class="toggle-password">
+                        <img th:src="@{/images/eye.png}" alt="eye" style="width: 18px">
+                    </span>
+                </div>
+                <p th:errors="*{confirmPassword}" class="error"></p>
+                <button type="submit" class="btn-primary">Đăng ký</button>
+            </form>
+            <p class="register-text">Đã có tài khoản? <a th:href="@{/users/login}">Đăng nhập ngay</a></p>
+        </div>
+        <div class="right-panel">
+            <img th:src="@{/images/login-banner-1.png}" alt="Background-1" class="active">
+            <img th:src="@{/images/login-banner-2.png}" alt="Background-2">
+            <img th:src="@{/images/login-banner-3.png}" alt="Background-3">
+        </div>
+    </div>
+</div> <!-- Flatpickr JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script th:src="@{/js/auth.js}"></script>
+</body>
+</html>

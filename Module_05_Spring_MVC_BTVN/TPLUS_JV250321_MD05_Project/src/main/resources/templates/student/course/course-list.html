@@ -2,80 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Post</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+    <title>Course List</title>
+    <link rel="stylesheet" th:href="@{/css/course-list.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<div class="toast" th:if="${successMsg} or ${errMsg}">
+    <p th:if="${successMsg}" th:text="${successMsg}" style="color: green"></p>
+    <p th:if="${errMsg}" th:text="${errMsg}" style="color: red"></p>
+</div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<!-- HEADER -->
+<div th:replace="~{fragments/student-fragments :: header}"></div>
 
-<main>
-    <p th:text="${successMsg}" style="color: green"></p>
-    <p th:text="${errMsg}" style="color: red"></p>
-    <h2>Danh sách khóa học</h2>
+<main class="course-page">
+    <h2 class="page-title">Danh sách khóa học</h2>
 
+    <!-- Search box -->
     <div class="search-container">
-        <form th:action="@{/student/show-course-list(page = ${pageNum})}" method="get">
-            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
-            <button type="submit" style="cursor: pointer">Tìm kiếm</button>
+        <form th:action="@{/student/courses(page=${pageNum})}" method="get">
+            <input type="text" name="searchValue" th:value="${searchValue}" placeholder="search course by name">
+            <button type="submit">Tìm kiếm</button>
         </form>
     </div>
 
-    <table style="margin-top: 20px">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên khóa học</th>
-            <th>Hình ảnh</th>
-            <th>Thời lượng</th>
-            <th>Giảng viên phụ trách</th>
-            <th>Ngày thêm</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="course : ${courses}">
-            <td th:text="${course.id}"></td>
-            <td th:text="${course.name}"></td>
-            <td>
-                <img th:if="${course.image != null}" th:src="@{${course.image}}" style="width:100px;height:100px;"
-                     alt="Ảnh khóa học">
-                <span th:if="${course.image == null}">Không có ảnh</span>
-            </td>
-            <td th:text="${course.duration + ' (h)'}"></td>
-            <td th:text="${course.instructor}"></td>
-            <td th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></td>
-        </tr>
-        <tr th:if="${courses.content.size() == 0}">
-            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy khóa học nào</td>
-        </tr>
-        </tbody>
-    </table>
+    <!-- Course list -->
+    <div class="course-grid">
+        <div th:each="course : ${courses}" class="course-card">
+            <div class="card-img">
+                <img th:if="${course.image != null}" th:src="@{${course.image}}" alt="Course Image">
+                <span th:if="${course.image == null}" class="no-img">Không có ảnh</span>
+            </div>
+            <div class="card-content">
+                <h3 th:text="${course.name}"></h3>
+                <p class="subtitle">Let's explore</p>
+                <p>Duration: <span th:text="${course.duration}"></span> hour</p>
+                <p>Instructor: <span th:text="${course.instructor}"></span></p>
+                <p class="date" th:text="${#temporals.format(course.createAt, 'dd/MM/yyyy')}"></p>
+            </div>
+            <div class="card-footer">
+                <a class="btn registry" th:href="@{/student/register-course/{id}(id=${course.id})}">Đăng ký</a>
+            </div>
+        </div>
+    </div>
 
-    <div th:if="${courses.content.size() > 0}">
+    <!-- Pagination -->
+    <div class="pagination-container" th:if="${courses.content.size() > 0}">
         <a th:if="${courses.hasPrevious()}"
-           th:href="@{/student/show-course-list(page = ${courses.number - 1}, size=${courses.size}, searchValue=${searchValue})}"
-           th:text="Prev"
-           class="pagination">
+           th:href="@{/student/courses(page=${courses.number - 1}, size=${courses.size}, searchValue=${searchValue})}">
+            &larr;
         </a>
-
         <a th:each="pageNum : ${#numbers.sequence(0, courses.totalPages - 1)}"
+           th:href="@{/student/courses(page=${pageNum}, size=${courses.size}, searchValue=${searchValue})}"
            th:text="${pageNum + 1}"
-           th:href="@{/student/show-course-list(page = ${pageNum}, size=${courses.size}, searchValue=${searchValue})}"
-           th:styleappend="${pageNum == courses.number} ? 'background-color:red' : ''"
-           class="pagination">
+           th:classappend="${pageNum == courses.number} ? 'active'">
         </a>
-
         <a th:if="${courses.hasNext()}"
-           th:href="@{/student/show-course-list(page = ${courses.number + 1}, size=${courses.size}, searchValue=${searchValue})}"
-           class="pagination"
-           th:text="Next">
+           th:href="@{/student/courses(page=${courses.number + 1}, size=${courses.size}, searchValue=${searchValue})}">
+            &rarr;
         </a>
     </div>
 </main>
-
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+<script th:src="@{/js/toast.js}"></script>
 </body>
 </html>

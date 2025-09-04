@@ -2,87 +2,134 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Post</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}"/>
+    <title>Course Manager</title>
+    <link rel="stylesheet" th:href="@{/css/enrollment-list.css}">
+    <link rel="stylesheet" th:href="@{/css/toast.css}">
 </head>
-<!-- Kế thừa header/footer từ fragments -->
 <body>
+<div class="toast" th:if="${successMsg} or ${errMsg}">
+    <p th:if="${successMsg}" th:text="${successMsg}" style="color: green"></p>
+    <p th:if="${errMsg}" th:text="${errMsg}" style="color: red"></p>
+</div>
 
-<!-- Header -->
-<div th:replace="~{fragments/fragments :: header}"></div>
+<!-- HEADER -->
+<div th:replace="~{fragments/student-fragments :: header}"></div>
 
-<main>
-    <p th:text="${successMsg}" style="color: green"></p>
-    <p th:text="${errMsg}" style="color: red"></p>
-    <h2>Lịch sử đăng ký khóa học</h2>
+<!-- MAIN CONTENT -->
+<main class="dashboard-content">
+    <!-- Title -->
+    <div class="page-header">
+        <h2>Lịch sử đăng ký khóa học</h2>
+    </div>
 
-    <div class="search-container">
-        <form th:action="@{/student/show-enrollment-history}" method="get">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <select name="status" onchange="filterEnrollment(this)" class="filter-select">
+            <option th:value="@{/student/enrollments(status = null, searchValue = ${searchValue})}"
+                    th:selected="${status == null}">
+                -- Lọc theo trạng thái --
+            </option>
+            <option th:value="@{/student/enrollments(status = 'WAITING', searchValue = ${searchValue})}"
+                    th:selected="${status == 'WAITING'}">
+                WAITING
+            </option>
+            <option th:value="@{/student/enrollments(status = 'CONFIRMED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'CONFIRMED'}">
+                CONFIRMED
+            </option>
+            <option th:value="@{/student/enrollments(status = 'DENIED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'DENIED'}">
+                DENIED
+            </option>
+            <option th:value="@{/student/enrollments(status = 'CANCELLED', searchValue = ${searchValue})}"
+                    th:selected="${status == 'CANCELLED'}">
+                CANCELLED
+            </option>
+        </select>
+
+        <form th:action="@{/student/enrollments}" method="get" class="search-form">
             <input type="text" name="searchValue" th:value="${searchValue}" placeholder="Tìm kiếm khóa học">
             <button type="submit" style="cursor: pointer">Tìm kiếm</button>
         </form>
     </div>
 
-    <table style="margin-top: 20px">
-        <thead>
-        <tr>
-            <th>Mã khóa học</th>
-            <th>Tên khóa học</th>
-            <th>Thời lượng (giờ)</th>
-            <th>Giảng viên phụ trách</th>
-            <th>Hình ảnh</th>
-            <th>Ngày thêm</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="enrollment : ${enrollments}">
-            <td th:text="${enrollment.course.id}"></td>
-            <td th:text="${enrollment.course.name}"></td>
-            <td th:text="${enrollment.course.duration}"></td>
-            <td th:text="${enrollment.course.instructor}"></td>
-            <td>
-                <img th:if="${enrollment.course.image != null}" th:src="@{${enrollment.course.image}}" style="width:100px;height:100px;"
-                     alt="Ảnh khóa học">
-                <span th:if="${enrollment.course.image == null}">Không có ảnh</span>
-            </td>
-            <td th:text="${#temporals.format(enrollment.createAt, 'dd/MM/yyyy')}"></td>
-            <td th:text="${enrollment.status}"></td>
-            <td>
-                <a th:href="@{/student/cancel-enrollment/{id}(id=${enrollment.id})}">CANCEL</a>
-            </td>
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Mã khóa học</th>
+                <th>Tên khóa học</th>
+                <th>Thời lượng (giờ)</th>
+                <th>Giảng viên phụ trách</th>
+                <th>Hình ảnh</th>
+                <th>Ngày đăng ký</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="enrollment : ${enrollments}">
+                <td th:text="${enrollment.course.id}"></td>
+                <td th:text="${enrollment.course.name}"></td>
+                <td th:text="${enrollment.course.duration}"></td>
+                <td th:text="${enrollment.course.instructor}"></td>
+                <td>
+                    <img th:if="${enrollment.course.image != null}" th:src="@{${enrollment.course.image}}"
+                         alt="Ảnh khóa học">
+                    <span th:if="${enrollment.course.image == null}">Không có ảnh</span>
+                </td>
+                <td th:text="${#temporals.format(enrollment.createAt, 'dd/MM/yyyy')}"></td>
+                <td>
+                        <span th:if="${#strings.equalsIgnoreCase(enrollment.status, 'WAITING')}"
+                              class="waiting-status" th:text="${enrollment.status}"></span>
+                    <span th:if="${#strings.equalsIgnoreCase(enrollment.status, 'CONFIRMED')}"
+                          class="confirm-status" th:text="${enrollment.status}"></span>
+                    <span th:if="${#strings.equalsIgnoreCase(enrollment.status, 'DENIED')}"
+                          class="deny-status" th:text="${enrollment.status}"></span>
+                    <span th:if="${#strings.equalsIgnoreCase(enrollment.status, 'CANCELLED')}"
+                          class="cancel-status" th:text="${enrollment.status}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/student/cancel-enrollment/{id}(id=${enrollment.id})}"
+                       class="action cancel-action">CANCEL</a>
+                </td>
 
-        </tr>
-        <tr th:if="${enrollments.content.size() == 0}">
-            <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy lịch sử đăng ký khóa học nào</td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            <tr th:if="${enrollments.content.size() == 0}">
+                <td colspan="6" style="padding:14px;text-align:center;color:#666;">Không tìm thấy lịch sử đăng ký khóa
+                    học nào
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <div th:if="${enrollments.content.size() > 0}">
+    <!-- Pagination -->
+    <div class="pagination-wrapper" th:if="${enrollments.content.size() > 0}">
         <a th:if="${enrollments.hasPrevious()}"
-           th:href="@{/student/show-enrollment-history(page = ${enrollments.number - 1}, size=${enrollments.size}, searchValue=${searchValue})}"
-           th:text="Prev"
-           class="pagination">
+           th:href="@{/student/enrollments(page = ${enrollments.number - 1}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
+           th:text="Prev">
         </a>
 
         <a th:each="pageNum : ${#numbers.sequence(0, enrollments.totalPages - 1)}"
            th:text="${pageNum + 1}"
-           th:href="@{/student/show-enrollment-history(page = ${pageNum}, size=${enrollments.size}, searchValue=${searchValue})}"
-           th:styleappend="${pageNum == enrollments.number} ? 'background-color:red' : ''"
-           class="pagination">
+           th:href="@{/student/enrollments(page = ${pageNum}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
+           th:classappend="${pageNum == enrollments.number} ? 'active' : ''">
         </a>
 
         <a th:if="${enrollments.hasNext()}"
-           th:href="@{/student/show-enrollment-history(page = ${enrollments.number + 1}, size=${enrollments.size}, searchValue=${searchValue})}"
-           class="pagination"
+           th:href="@{/student/enrollments(page = ${enrollments.number + 1}, size=${enrollments.size}, searchValue=${searchValue}, status=${status})}"
            th:text="Next">
         </a>
     </div>
 </main>
 
-<!-- Footer -->
-<div th:replace="~{fragments/fragments :: footer}"></div>
+<script th:src="@{/js/toast.js}"></script>
+<script>
+    function filterEnrollment(field) {
+        window.location.href = field.value;
+    }
+</script>
 </body>
 </html>
