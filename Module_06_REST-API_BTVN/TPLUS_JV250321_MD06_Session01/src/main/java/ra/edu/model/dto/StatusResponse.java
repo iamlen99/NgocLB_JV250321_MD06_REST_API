@@ -1,4 +1,4 @@
-package ra.edu.model.entity;
+package ra.edu.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WebServices {
-    private String name;
-    private String value;
+public class StatusResponse {
+    private String orderNumber;
+    private String status;
 }
