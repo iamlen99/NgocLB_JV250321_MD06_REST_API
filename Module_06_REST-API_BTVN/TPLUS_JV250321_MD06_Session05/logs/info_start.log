@@ -1,0 +1,206 @@
+2025-09-15 04:26:58 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 46911 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 04:26:58 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 04:27:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 04:27:01 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5116c4
+2025-09-15 04:27:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 04:27:03 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 4.883 seconds (process running for 5.324)
+2025-09-15 04:28:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 04:28:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 04:28:27 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 47161 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 04:28:27 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 04:28:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 04:28:29 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27931cc2
+2025-09-15 04:28:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 04:28:30 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 3.861 seconds (process running for 4.197)
+2025-09-15 04:32:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 04:32:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 04:32:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 47554 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 04:32:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 04:32:52 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 04:32:53 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f6cf6ef
+2025-09-15 04:32:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 04:32:54 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 4.044 seconds (process running for 4.456)
+2025-09-15 05:14:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:14:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:14:57 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 51004 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:14:57 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:14:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:15:00 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49ad4b3c
+2025-09-15 05:15:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:15:01 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 4.14 seconds (process running for 4.539)
+2025-09-15 05:16:30 [http-nio-9999-exec-4] INFO  r.edu.service.impl.MovieServiceImpl - Create movie - ra.edu.model.entity.Movie@33890204
+2025-09-15 05:17:26 [http-nio-9999-exec-7] INFO  r.edu.service.impl.MovieServiceImpl - Before update: ra.edu.model.entity.Movie@4dc17918
+2025-09-15 05:17:26 [http-nio-9999-exec-7] INFO  r.edu.service.impl.MovieServiceImpl - After update - ra.edu.model.entity.Movie@4dc17918
+2025-09-15 05:19:41 [http-nio-9999-exec-10] INFO  r.edu.service.impl.MovieServiceImpl - Before update: ra.edu.model.entity.Movie@6198fe9f
+2025-09-15 05:19:41 [http-nio-9999-exec-10] INFO  r.edu.service.impl.MovieServiceImpl - After update - ra.edu.model.entity.Movie@6198fe9f
+2025-09-15 05:44:32 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:44:32 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:44:32 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 51004 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:44:32 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:44:32 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 53109 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:44:32 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:44:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-09-15 05:44:33 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@9b75e17
+2025-09-15 05:44:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-09-15 05:44:34 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 1.72 seconds (process running for 1777.217)
+2025-09-15 05:44:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:44:35 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4513cadf
+2025-09-15 05:44:35 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:44:36 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:44:36 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:44:56 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 53308 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:44:56 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:44:58 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:44:59 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@43f63b24
+2025-09-15 05:44:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:45:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:45:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:45:06 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 53464 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:45:06 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:45:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:45:09 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1cbf8fdd
+2025-09-15 05:45:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:45:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:45:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:45:20 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 53645 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:45:20 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:45:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:45:22 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@dc2718d
+2025-09-15 05:45:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:45:24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:45:24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:46:16 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 53870 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:46:16 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:46:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:46:18 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3178fba7
+2025-09-15 05:46:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:46:20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:46:20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:46:28 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 54019 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:46:28 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:46:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:46:30 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17012b6f
+2025-09-15 05:46:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:46:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:46:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:47:26 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 54331 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:47:26 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:47:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:47:29 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@521bfc3b
+2025-09-15 05:47:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:47:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:47:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:47:48 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 54497 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:47:48 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:47:49 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:47:50 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3d8326fe
+2025-09-15 05:47:50 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:47:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:47:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:48:00 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 54678 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:48:00 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:48:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:48:01 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31b5195c
+2025-09-15 05:48:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:48:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:48:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:48:10 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 54854 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:48:10 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:48:11 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:48:12 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1c8ad332
+2025-09-15 05:48:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:48:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:48:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:48:37 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 55041 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:48:37 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:48:39 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:48:39 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@23a7fb44
+2025-09-15 05:48:39 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:48:40 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:48:40 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:51:39 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 55682 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:51:39 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:51:40 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:51:41 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2859faad
+2025-09-15 05:51:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:51:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:51:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:51:48 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 55864 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:51:48 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:51:49 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:51:50 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4f29a36c
+2025-09-15 05:51:50 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:51:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:51:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:51:57 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 56034 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:51:57 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:51:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:51:59 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@235799f4
+2025-09-15 05:51:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:52:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:52:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:53:05 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 56245 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:53:05 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:53:06 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-09-15 05:53:06 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-09-15 05:53:06 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 51004 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:53:06 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:53:06 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-09-15 05:53:06 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@15b363ad
+2025-09-15 05:53:06 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-09-15 05:53:07 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 0.976 seconds (process running for 2290.293)
+2025-09-15 05:53:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:53:08 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1171a7a1
+2025-09-15 05:53:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:53:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:53:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:53:22 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 56447 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:53:22 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:53:24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:53:24 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cc86e26
+2025-09-15 05:53:24 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:53:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:53:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 05:53:43 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 56630 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 05:53:43 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 05:53:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 05:53:45 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1fa574c7
+2025-09-15 05:53:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 05:53:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 05:53:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 06:20:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 59549 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 06:20:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 06:20:50 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-09-15 06:20:50 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2025-09-15 06:20:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 51004 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 06:20:50 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 06:20:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2025-09-15 06:20:51 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7720257d
+2025-09-15 06:20:51 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2025-09-15 06:20:52 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Started TplusJv250321Md06Session05Application in 1.395 seconds (process running for 3955.219)
+2025-09-15 06:20:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 06:20:53 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a78114b
+2025-09-15 06:20:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 06:20:55 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 06:20:55 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 06:21:05 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 59751 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 06:21:05 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 06:21:07 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 06:21:07 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ce0ae1
+2025-09-15 06:21:07 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 06:21:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 06:21:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 06:22:09 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 60015 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 06:22:09 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 06:22:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 06:22:10 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@445a70e8
+2025-09-15 06:22:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 06:22:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 06:22:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-15 06:22:23 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - Starting TplusJv250321Md06Session05Application using Java 17.0.12 with PID 60193 (/home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05/build/classes/java/main started by ngoclb in /home/ngoclb/Documents/Rikkei_Academy/Code/Module_06_REST-API/Module_06_REST-API_BTVN/TPLUS_JV250321_MD06_Session05)
+2025-09-15 06:22:23 [restartedMain] INFO  r.e.TplusJv250321Md06Session05Application - No active profile set, falling back to 1 default profile: "default"
+2025-09-15 06:22:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-15 06:22:25 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@789ba303
+2025-09-15 06:22:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-15 06:22:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-15 06:22:27 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
