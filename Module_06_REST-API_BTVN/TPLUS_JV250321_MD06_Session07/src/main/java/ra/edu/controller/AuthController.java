@@ -47,7 +47,7 @@ public class AuthController {
             response.setStatus(HttpStatus.OK);
             return ResponseEntity.ok(response);
 
-        } catch (BadCredentialsException e) {
+        } catch (AuthenticationException e) {
             response.setSuccess(false);
             response.setMessage("Invalid username or password");
             response.setErrors(e.getMessage());
@@ -67,7 +67,7 @@ public class AuthController {
             response.setErrors(null);
             response.setStatus(HttpStatus.OK);
             return ResponseEntity.ok(response);
-        } catch (AuthenticationException ex) {
+        } catch (RuntimeException ex) {
             response.setSuccess(false);
             response.setMessage("Registration failed");
             response.setData(null);
