@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ra.edu.security.principal.UserDetailServiceCustom;
+import ra.edu.service.BlacklistService;
 
 import java.io.IOException;
 
@@ -24,6 +25,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtProvider jwtProvider;
     @Autowired
     private UserDetailServiceCustom userDetailServiceCustom;
+    @Autowired
+    private BlacklistService blacklistService;
 
     @Override
     protected void doFilterInternal(
@@ -38,6 +41,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = getTokenFromRequest(request);
+
+        if (blacklistService.isBlacklisted(token)) {
+            sendError(response, HttpServletResponse.SC_UNAUTHORIZED, "TOKEN_REVOKED", "Token has been revoked. Please login again.");
+            return;
+        }
 
         try {
             if (token == null) {

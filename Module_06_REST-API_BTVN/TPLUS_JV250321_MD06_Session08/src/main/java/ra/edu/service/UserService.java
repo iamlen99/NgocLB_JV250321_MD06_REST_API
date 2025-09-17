@@ -9,4 +9,6 @@ public interface UserService {
     Users register(UserRegister userRegister);
 
     JwtResponse login(UserLogin userLogin);
+
+    JwtResponse refreshAccessToken(String refreshToken);
 }

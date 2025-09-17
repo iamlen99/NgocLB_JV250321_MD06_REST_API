@@ -18,12 +18,22 @@ public class JwtProvider {
     @Value("${jwt.secret_key}")
     private String SECRET_KEY;
 
-    public String generateToken(UserPrincipal userPrincipal) {
+    public String generateAccessToken(UserPrincipal userPrincipal) {
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
                 .claim("roles", userPrincipal.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + EXPIRED))
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
+    }
+
+    public String generateRefreshToken(UserPrincipal userPrincipal) {
+        Date now = new Date();
+        return Jwts.builder()
+                .setSubject(userPrincipal.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(now.getTime() + REFRESH))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
@@ -47,17 +57,19 @@ public class JwtProvider {
     }
 
     public String getUsernameFromToken(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
-    public String refreshToken(String jwtOld) {
-        String username = getUsernameFromToken(jwtOld); // Lấy subject từ token cũ
-        Date now = new Date();
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(now.getTime() + REFRESH))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                .compact();
+    public Date getExpirationDateFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
     }
+
 }

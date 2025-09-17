@@ -90,8 +90,34 @@ public class UserServiceImpl implements UserService {
                 .phone(userPrincipal.getPhone())
                 .roles(userPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet()))
                 .status(userPrincipal.getStatus())
-                .accessToken(jwtProvider.generateToken(userPrincipal))
-//                .refreshToken(jwtProvider.refreshToken())
+                .accessToken(jwtProvider.generateAccessToken(userPrincipal))
+                .refreshToken(jwtProvider.generateRefreshToken(userPrincipal))
+                .build();
+    }
+
+    @Override
+    public JwtResponse refreshAccessToken(String refreshToken) {
+        if (!jwtProvider.validateToken(refreshToken)) {
+            throw new RuntimeException("Invalid refresh token");
+        }
+        String username = jwtProvider.getUsernameFromToken(refreshToken);
+        Users user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserPrincipal userPrincipal = (UserPrincipal) UserPrincipal.getUserDetails(user);
+
+        return JwtResponse.builder()
+                .username(userPrincipal.getUsername())
+                .fullName(userPrincipal.getFullName())
+                .email(userPrincipal.getEmail())
+                .address(userPrincipal.getAddress())
+                .phone(userPrincipal.getPhone())
+                .roles(userPrincipal.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toSet()))
+                .status(userPrincipal.getStatus())
+                .accessToken(jwtProvider.generateAccessToken(userPrincipal))
+                .refreshToken(refreshToken)
                 .build();
     }
 }
