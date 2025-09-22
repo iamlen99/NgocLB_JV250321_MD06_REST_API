@@ -21,7 +21,6 @@ import ra.edu.validation.UserValidator;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 @Service
 @Slf4j

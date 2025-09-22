@@ -8,28 +8,36 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "evaluation_criterion")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EvaluationCriteria {
+@Table(
+        name = "round_criterion",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"round_id", "criteria_id"})
+        }
+)
+public class RoundCriteria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long roundCriteriaId;
 
-    @Column(unique = true, nullable = false, length = 200)
-    private String criterionName;
-
-    private String description;
-
-    @Column(nullable = false, columnDefinition = "DOUBLE CHECK (max_score > 0)")
-    private Double maxScore;
+    @Column(nullable = false, columnDefinition = "DOUBLE CHECK (weight > 0)")
+    private Double weight;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "round_id")
+    private AssessmentRound assessmentRound;
+
+    @ManyToOne
+    @JoinColumn(name = "criteria_id")
+    private EvaluationCriteria evaluationCriteria;
 }

@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findById(Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Không tìm thấy học sinh có id = " + id));
+                .orElseThrow(() -> new NoSuchElementException("Không tìm thấy sinh viên có id = " + id));
     }
 
     @Override

@@ -23,6 +23,7 @@ import ra.edu.repository.UserRepository;
 import ra.edu.securirty.jwt.JwtProvider;
 import ra.edu.securirty.principal.UserPrincipal;
 import ra.edu.service.AuthService;
+import ra.edu.service.UserService;
 import ra.edu.validation.UserValidator;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
+    private final UserService userService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationProvider authenticationProvider;
@@ -70,27 +72,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Users getCurrentUser() {
         UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Set<Roles> roles = userPrincipal.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .map(roleName ->
-                {
-                    String role = roleName.replace("ROLE_", "");
-                    return roleRepository.findByRoleName(RoleName.valueOf(role.toUpperCase()))
-                            .orElseThrow(() -> new NoSuchElementException("Không tồn tại role :" + role));
-                })
-                .collect(Collectors.toSet());
-
-        return Users.builder()
-                .userId(userPrincipal.getUserId())
-                .username(userPrincipal.getUsername())
-                .fullName(userPrincipal.getFullName())
-                .email(userPrincipal.getEmail())
-                .phone(userPrincipal.getPhone())
-                .isActive(true)
-                .createdAt(userPrincipal.getCreatedAt())
-                .updatedAt(userPrincipal.getUpdatedAt())
-                .roles(roles)
-                .build();
+        return userService.findById(userPrincipal.getUserId());
     }
 
     @Override

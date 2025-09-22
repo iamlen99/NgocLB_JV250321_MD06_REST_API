@@ -9,9 +9,9 @@ public interface EvaluationCriteriaService {
 
     EvaluationCriteria findById(Long id);
 
-    EvaluationCriteria createEvaluationCriteria(EvaluationCriteriaRequest evaluationCriteriaPhaseRequest);
+    EvaluationCriteria createEvaluationCriteria(EvaluationCriteriaRequest evaluationCriteriaRequest);
 
-    EvaluationCriteria updateEvaluationCriteria(Long id, EvaluationCriteriaRequest evaluationCriteriaPhaseRequest);
+    EvaluationCriteria updateEvaluationCriteria(Long id, EvaluationCriteriaRequest evaluationCriteriaRequest);
 
     void deleteEvaluationCriteria(Long id);
 }
