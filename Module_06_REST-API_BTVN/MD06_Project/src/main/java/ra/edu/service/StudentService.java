@@ -3,13 +3,15 @@ package ra.edu.service;
 import org.springframework.data.domain.Page;
 import ra.edu.model.entity.Student;
 import ra.edu.model.request.StudentRequest;
+import ra.edu.model.response.StudentResponse;
+import ra.edu.model.response.StudentsDetailsResponse;
 
 public interface StudentService {
-    Page<Student> getAllStudent(int page, int size);
+    Page<StudentResponse> getAllStudent(int page, int size);
 
-    Student findById(Long id);
+    StudentsDetailsResponse findById(Long id);
 
     Student createStudent(StudentRequest studentRequest);
 
-    Student updateStudent(StudentRequest studentRequest);
+    Student updateStudent(Long studentId, StudentRequest studentRequest);
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ra.edu.model.entity.Student;
 import ra.edu.model.request.StudentRequest;
 import ra.edu.model.response.ApiDataResponse;
+import ra.edu.model.response.StudentResponse;
+import ra.edu.model.response.StudentsDetailsResponse;
 import ra.edu.service.StudentService;
 
 @RestController
@@ -25,29 +27,30 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiDataResponse<Page<Student>>> getAllStudents(
+    public ResponseEntity<ApiDataResponse<Page<StudentResponse>>> getAllStudents(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        Page<Student> students = studentService.getAllStudent(page, size);
+        Page<StudentResponse> students = studentService.getAllStudent(page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiDataResponse.success(students, "Lấy danh sách sinh viên thành công"));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiDataResponse<Student>> getStudentById(
+    public ResponseEntity<ApiDataResponse<StudentsDetailsResponse>> getStudentById(
             @PathVariable Long id
     ) {
-        Student student = studentService.findById(id);
+        StudentsDetailsResponse student = studentService.findById(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiDataResponse.success(student, "Lấy thông tin sinh viên thành công"));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiDataResponse<Student>> updateStudentById(
-            @Valid @RequestBody StudentRequest studentRequest
+            @Valid @RequestBody StudentRequest studentRequest,
+            @PathVariable Long id
     ) {
-        Student studentUpdate = studentService.updateStudent(studentRequest);
+        Student studentUpdate = studentService.updateStudent(id, studentRequest);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiDataResponse.success(studentUpdate, "Cập nhật thông tin sinh viên thành công"));
     }

@@ -3,13 +3,17 @@ package ra.edu.service;
 import org.springframework.data.domain.Page;
 import ra.edu.model.entity.Mentor;
 import ra.edu.model.request.MentorRequest;
+import ra.edu.model.response.MentorDetailsResponse;
+import ra.edu.model.response.MentorResponse;
 
 public interface MentorService {
-    Page<Mentor> getAllMentor(int page, int size);
+    Page<MentorResponse> getAllMentors(int page, int size);
 
-    Mentor findById(Long id);
+    Page<MentorDetailsResponse> getAllMentorsDetails(int page, int size);
+
+    MentorDetailsResponse findById(Long id);
 
     Mentor createMentor(MentorRequest mentorRequest);
 
-    Mentor updateMentor(MentorRequest mentorRequest);
+    Mentor updateMentor(Long mentorId, MentorRequest mentorRequest);
 }

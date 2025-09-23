@@ -4,14 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import ra.edu.model.entity.RoleName;
 import ra.edu.model.entity.Mentor;
 import ra.edu.model.entity.Users;
 import ra.edu.model.request.MentorRequest;
+import ra.edu.model.response.MentorDetailsResponse;
+import ra.edu.model.response.MentorResponse;
 import ra.edu.repository.MentorRepository;
-import ra.edu.repository.UserRepository;
+import ra.edu.service.AuthService;
 import ra.edu.service.MentorService;
+import ra.edu.validation.MentorValidator;
+import ra.edu.validation.UserRoleValidator;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
@@ -20,53 +24,61 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class MentorServiceImpl implements MentorService {
     private final MentorRepository mentorRepository;
-    private final UserRepository userRepository;
+    private final AuthService authService;
+    private final UserRoleValidator  userRoleValidator;
+    private final MentorValidator mentorValidator;
+
 
     @Override
-    public Page<Mentor> getAllMentor(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return mentorRepository.findAll(pageable);
+    public Page<MentorResponse> getAllMentors(int page, int size) {
+        Pageable pageable = PageRequest.of(page > 0 ? page - 1 : 0, size);
+        return mentorRepository.findAllMentors(pageable);
     }
 
     @Override
-    public Mentor findById(Long id) {
-        return mentorRepository.findById(id)
+    public Page<MentorDetailsResponse> getAllMentorsDetails(int page, int size) {
+        Pageable pageable = PageRequest.of(page > 0 ? page - 1 : 0, size);
+        return mentorRepository.findAllMentorsDetails(pageable);
+    }
+
+    @Override
+    public MentorDetailsResponse findById(Long id) {
+        Users currentUser = authService.getCurrentUser();
+        if (userRoleValidator.isMentor(currentUser)) {
+            if (currentUser.getUserId().equals(id)) {
+                return mentorRepository.findMentorsDetailsByMentorId(currentUser.getUserId())
+                        .orElseThrow(() -> new NoSuchElementException("Có lỗi trong quá trình lấy thông tin, xin thử lại"));
+            }
+            throw new AccessDeniedException("Bạn chỉ được lấy thông tin theo id của mình là " + currentUser.getUserId());
+        }
+        return mentorRepository.findMentorsDetailsByMentorId(id)
                 .orElseThrow(() -> new NoSuchElementException("Không tìm thấy mentor có id = " + id));
     }
 
     @Override
     public Mentor createMentor(MentorRequest mentorRequest) {
-
-        Users user = userRepository.findById(mentorRequest.getMentorId())
-                .orElseThrow(() -> new NoSuchElementException("Không tìm thấy người dùng có id = " + mentorRequest.getMentorId()));
-        boolean hasMentorRole = user.getRoles().stream()
-                .anyMatch(role -> role.getRoleName() == RoleName.MENTOR);
-
-        if (!hasMentorRole) {
-            throw new IllegalArgumentException("Chỉ được tạo thông tin mentor mới khi người dùng là MENTOR");
-        }
+        Users user = mentorValidator.validateMentorInfo(mentorRequest);
 
         Mentor mentor = Mentor.builder()
                 .user(user)
                 .department(mentorRequest.getDepartment())
                 .academicRank(mentorRequest.getAcademicRank())
                 .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
         return mentorRepository.save(mentor);
     }
 
     @Override
-    public Mentor updateMentor(MentorRequest mentorRequest) {
-        Mentor existingMentor = mentorRepository.findById(mentorRequest.getMentorId())
+    public Mentor updateMentor(Long mentorId, MentorRequest mentorRequest) {
+        Users currentUser = authService.getCurrentUser();
+
+        Mentor existingMentor = mentorRepository.findById(mentorId)
                 .orElseThrow(() -> new NoSuchElementException(
-                        "Không tìm thấy mentor có id = " + mentorRequest.getMentorId()));
+                        "Không tìm thấy mentor có id = " + mentorId));
 
-        Users user = existingMentor.getUser();
-        boolean hasMentorRole = user.getRoles().stream()
-                .anyMatch(role -> role.getRoleName() == RoleName.MENTOR);
-
-        if (!hasMentorRole) {
-            throw new IllegalArgumentException("Chỉ được cập nhật thông tin mentor khi người dùng là MENTOR");
+        if (userRoleValidator.isMentor(currentUser) && mentorId.equals(currentUser.getUserId())) {
+            throw new AccessDeniedException("Bạn chỉ được cập nhật thông tin theo id của mình là " + currentUser.getUserId());
         }
 
         existingMentor.setDepartment(mentorRequest.getDepartment());
