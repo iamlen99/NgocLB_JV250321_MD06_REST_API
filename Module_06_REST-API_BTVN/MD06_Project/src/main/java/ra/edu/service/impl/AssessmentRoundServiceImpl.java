@@ -46,7 +46,8 @@ public class AssessmentRoundServiceImpl implements AssessmentRoundService {
                 .endDate(assessmentRoundRequest.getEndDate())
                 .description(assessmentRoundRequest.getDescription())
                 .isActive(true)
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return assessmentRoundRepository.save(assessmentRound);
     }
@@ -61,7 +62,7 @@ public class AssessmentRoundServiceImpl implements AssessmentRoundService {
         existingAssessmentRound.setStartDate(assessmentRoundRequest.getStartDate());
         existingAssessmentRound.setEndDate(assessmentRoundRequest.getEndDate());
         existingAssessmentRound.setDescription(assessmentRoundRequest.getDescription());
-        existingAssessmentRound.setUpdatedAt(LocalDateTime.now());
+        existingAssessmentRound.setUpdatedAt(LocalDateTime.now().withNano(0));
         return assessmentRoundRepository.save(existingAssessmentRound);
     }
 

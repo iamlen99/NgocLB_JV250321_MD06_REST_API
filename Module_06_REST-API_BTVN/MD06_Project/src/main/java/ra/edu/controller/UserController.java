@@ -13,8 +13,6 @@ import ra.edu.model.request.UserUpdate;
 import ra.edu.model.response.ApiDataResponse;
 import ra.edu.service.UserService;
 
-import java.util.Set;
-
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -68,7 +66,7 @@ public class UserController {
                 .body(ApiDataResponse.success(user, "Cập nhật trạng thái kích hoạt của người dùng thành công"));
     }
 
-    @PutMapping("/{id}/roles")
+    @PutMapping("/{id}/role")
     public ResponseEntity<ApiDataResponse<Users>> updateRolesUser(
             @Valid @RequestBody RoleRequest roleRequest,
             @PathVariable Long id

@@ -1,6 +1,5 @@
 package ra.edu.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,19 +23,14 @@ public class InternshipAssignment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assignmentId;
 
-    @Column(nullable = false, length = 200)
-    private String roundName;
-
     @Column(nullable = false)
     private LocalDate assignedDate;
 
     @Column(nullable = false)
     private AssignmentStatus status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @ManyToOne

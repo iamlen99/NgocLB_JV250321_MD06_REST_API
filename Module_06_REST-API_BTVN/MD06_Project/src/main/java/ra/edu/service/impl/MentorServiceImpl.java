@@ -42,7 +42,7 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public MentorDetailsResponse findById(Long id) {
+    public MentorDetailsResponse findDetailsById(Long id) {
         Users currentUser = authService.getCurrentUser();
         if (userRoleValidator.isMentor(currentUser)) {
             if (currentUser.getUserId().equals(id)) {
@@ -56,6 +56,12 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
+    public Mentor findById(Long id) {
+        return mentorRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Có lỗi trong quá trình lấy thông tin, xin thử lại"));
+    }
+
+    @Override
     public Mentor createMentor(MentorRequest mentorRequest) {
         Users user = mentorValidator.validateMentorInfo(mentorRequest);
 
@@ -63,8 +69,8 @@ public class MentorServiceImpl implements MentorService {
                 .user(user)
                 .department(mentorRequest.getDepartment())
                 .academicRank(mentorRequest.getAcademicRank())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return mentorRepository.save(mentor);
     }
@@ -77,13 +83,13 @@ public class MentorServiceImpl implements MentorService {
                 .orElseThrow(() -> new NoSuchElementException(
                         "Không tìm thấy mentor có id = " + mentorId));
 
-        if (userRoleValidator.isMentor(currentUser) && mentorId.equals(currentUser.getUserId())) {
+        if (userRoleValidator.isMentor(currentUser) && !mentorId.equals(currentUser.getUserId())) {
             throw new AccessDeniedException("Bạn chỉ được cập nhật thông tin theo id của mình là " + currentUser.getUserId());
         }
 
         existingMentor.setDepartment(mentorRequest.getDepartment());
         existingMentor.setAcademicRank(mentorRequest.getAcademicRank());
-        existingMentor.setUpdatedAt(LocalDateTime.now());
+        existingMentor.setUpdatedAt(LocalDateTime.now().withNano(0));
 
         return mentorRepository.save(existingMentor);
     }

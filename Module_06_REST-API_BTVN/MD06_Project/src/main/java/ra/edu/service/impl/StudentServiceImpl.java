@@ -42,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentsDetailsResponse findById(Long id) {
+    public StudentsDetailsResponse findDetailsById(Long id) {
         Users currentUser = authService.getCurrentUser();
         if (userRoleValidator.isAdmin(currentUser)) {
             return studentRepository.findByStudentId(id)
@@ -60,6 +60,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student findById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(()-> new NoSuchElementException("Không tìm thấy sinh viên có id = " + id));
+    }
+
+    @Override
     public Student createStudent(StudentRequest studentRequest) {
         Users user = studentValidator.validateStudentInfo(studentRequest);
 
@@ -70,8 +76,8 @@ public class StudentServiceImpl implements StudentService {
                 .studentClass(studentRequest.getStudentClass())
                 .dateOfBirth(studentRequest.getDateOfBirth())
                 .address(studentRequest.getAddress())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return studentRepository.save(student);
     }
@@ -90,7 +96,7 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setStudentClass(studentRequest.getStudentClass());
         existingStudent.setDateOfBirth(studentRequest.getDateOfBirth());
         existingStudent.setAddress(studentRequest.getAddress());
-        existingStudent.setUpdatedAt(LocalDateTime.now());
+        existingStudent.setUpdatedAt(LocalDateTime.now().withNano(0));
 
         return studentRepository.save(existingStudent);
     }

@@ -28,7 +28,7 @@ public class AssessmentRoundController {
 
     @GetMapping
     public ResponseEntity<ApiDataResponse<Page<AssessmentRound>>> getAllAssessmentRounds(
-            @RequestParam Long phaseId,
+            @RequestParam(required = false) Long phaseId,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {

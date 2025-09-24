@@ -45,12 +45,12 @@ public class InternshipAssignmentServiceImpl implements InternshipAssignmentServ
             return internshipAssignmentRepository.findById(id)
                     .orElseThrow(() -> new NoSuchElementException("Không tìm thấy danh sách phân công thực tập có id = " + id));
         } else if (userRoleValidator.isMentor(currentUser)) {
-            return internshipAssignmentRepository.findByIdAndMentorMentorId(id, currentUser.getUserId())
+            return internshipAssignmentRepository.findByAssignmentIdAndMentorMentorId(id, currentUser.getUserId())
                     .orElseThrow(() -> new NoSuchElementException(
                             "Không tìm thấy phân công thực tập có id = " + id + " cho mentorId = " + currentUser.getUserId()));
 
         }
-        return internshipAssignmentRepository.findByIdAndStudentStudentId(id, currentUser.getUserId())
+        return internshipAssignmentRepository.findByAssignmentIdAndStudentStudentId(id, currentUser.getUserId())
                 .orElseThrow(() -> new NoSuchElementException(
                         "Không tìm thấy phân công thực tập có id = " + id + " cho studentId = " + currentUser.getUserId()));
     }
@@ -67,8 +67,8 @@ public class InternshipAssignmentServiceImpl implements InternshipAssignmentServ
                 .mentor(mentor)
                 .assignedDate(internshipAssignmentRequest.getAssignedDate())
                 .status(AssignmentStatus.PENDING)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return internshipAssignmentRepository.save(internshipAssignment);
     }
@@ -84,7 +84,7 @@ public class InternshipAssignmentServiceImpl implements InternshipAssignmentServ
             throw new BadRequestException("Trạng thái phân công thực tập không hợp lệ: " + status);
         }
 
-        existingInternshipAssignment.setUpdatedAt(LocalDateTime.now());
+        existingInternshipAssignment.setUpdatedAt(LocalDateTime.now().withNano(0));
         return internshipAssignmentRepository.save(existingInternshipAssignment);
     }
 

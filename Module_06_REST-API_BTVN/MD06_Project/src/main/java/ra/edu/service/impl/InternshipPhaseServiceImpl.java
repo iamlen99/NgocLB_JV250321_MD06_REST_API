@@ -33,7 +33,7 @@ public class InternshipPhaseServiceImpl implements InternshipPhaseService {
 
     @Override
     public InternshipPhase createInternshipPhase(InternshipPhaseRequest internshipPhaseRequest) {
-        if(!internshipPhaseRepository.existsByPhaseName(internshipPhaseRequest.getPhaseName())) {
+        if(internshipPhaseRepository.existsByPhaseName(internshipPhaseRequest.getPhaseName())) {
             throw new ResourceConflictException("Tên giai đoạn thực tập đã tồn tại!");
         }
 
@@ -42,7 +42,8 @@ public class InternshipPhaseServiceImpl implements InternshipPhaseService {
                 .startDate(internshipPhaseRequest.getStartDate())
                 .endDate(internshipPhaseRequest.getEndDate())
                 .description(internshipPhaseRequest.getDescription())
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return internshipPhaseRepository.save(internshipPhase);
     }
@@ -51,14 +52,14 @@ public class InternshipPhaseServiceImpl implements InternshipPhaseService {
     public InternshipPhase updateInternshipPhase(Long id, InternshipPhaseRequest internshipPhaseRequest) {
         InternshipPhase existingInternshipPhase = findById(id);
         if (!existingInternshipPhase.getPhaseName().equals(internshipPhaseRequest.getPhaseName())
-        && !internshipPhaseRepository.existsByPhaseName(internshipPhaseRequest.getPhaseName())) {
+        && internshipPhaseRepository.existsByPhaseName(internshipPhaseRequest.getPhaseName())) {
             throw new ResourceConflictException("Tên giai đoạn thực tập đã tồn tại!");
         }
         existingInternshipPhase.setPhaseName(internshipPhaseRequest.getPhaseName());
         existingInternshipPhase.setStartDate(internshipPhaseRequest.getStartDate());
         existingInternshipPhase.setEndDate(internshipPhaseRequest.getEndDate());
         existingInternshipPhase.setDescription(internshipPhaseRequest.getDescription());
-        existingInternshipPhase.setUpdatedAt(LocalDateTime.now());
+        existingInternshipPhase.setUpdatedAt(LocalDateTime.now().withNano(0));
         return internshipPhaseRepository.save(existingInternshipPhase);
     }
 

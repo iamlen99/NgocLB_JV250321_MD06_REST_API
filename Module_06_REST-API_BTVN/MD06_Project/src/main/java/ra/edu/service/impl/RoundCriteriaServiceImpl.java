@@ -45,7 +45,8 @@ public class RoundCriteriaServiceImpl implements RoundCriteriaService {
                 .weight(roundCriteriaRequest.getWeight())
                 .assessmentRound(assessmentRound)
                 .evaluationCriteria(evaluationCriteria)
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return roundCriteriaRepository.save(roundCriteria);
     }
@@ -59,7 +60,7 @@ public class RoundCriteriaServiceImpl implements RoundCriteriaService {
         existingRoundCriteria.setWeight(roundCriteriaRequest.getWeight());
         existingRoundCriteria.setAssessmentRound(assessmentRound);
         existingRoundCriteria.setEvaluationCriteria(evaluationCriteria);
-        existingRoundCriteria.setUpdatedAt(LocalDateTime.now());
+        existingRoundCriteria.setUpdatedAt(LocalDateTime.now().withNano(0));
         return roundCriteriaRepository.save(existingRoundCriteria);
     }
 

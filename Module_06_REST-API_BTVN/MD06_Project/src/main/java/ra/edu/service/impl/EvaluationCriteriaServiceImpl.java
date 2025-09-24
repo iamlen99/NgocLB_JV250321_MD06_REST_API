@@ -33,7 +33,7 @@ public class EvaluationCriteriaServiceImpl implements EvaluationCriteriaService 
 
     @Override
     public EvaluationCriteria createEvaluationCriteria(EvaluationCriteriaRequest evaluationCriteriaRequest) {
-        if(!evaluationCriteriaRepository.existsByCriterionName(evaluationCriteriaRequest.getCriterionName())) {
+        if(evaluationCriteriaRepository.existsByCriterionName(evaluationCriteriaRequest.getCriterionName())) {
             throw new ResourceConflictException("Tên tiêu chí đánh giá đã tồn tại!");
         }
 
@@ -41,7 +41,8 @@ public class EvaluationCriteriaServiceImpl implements EvaluationCriteriaService 
                 .criterionName(evaluationCriteriaRequest.getCriterionName())
                 .description(evaluationCriteriaRequest.getDescription())
                 .maxScore(evaluationCriteriaRequest.getMaxScore())
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return evaluationCriteriaRepository.save(evaluationCriteria);
     }
@@ -50,13 +51,13 @@ public class EvaluationCriteriaServiceImpl implements EvaluationCriteriaService 
     public EvaluationCriteria updateEvaluationCriteria(Long id, EvaluationCriteriaRequest evaluationCriteriaRequest) {
         EvaluationCriteria existingEvaluationCriteria = findById(id);
         if (!existingEvaluationCriteria.getCriterionName().equals(evaluationCriteriaRequest.getCriterionName())
-        && !evaluationCriteriaRepository.existsByCriterionName(evaluationCriteriaRequest.getCriterionName())) {
+        && evaluationCriteriaRepository.existsByCriterionName(evaluationCriteriaRequest.getCriterionName())) {
             throw new ResourceConflictException("Tên tiêu chí đánh giá đã tồn tại!");
         }
         existingEvaluationCriteria.setCriterionName(evaluationCriteriaRequest.getCriterionName());
         existingEvaluationCriteria.setDescription(evaluationCriteriaRequest.getDescription());
         existingEvaluationCriteria.setMaxScore(evaluationCriteriaRequest.getMaxScore());
-        existingEvaluationCriteria.setUpdatedAt(LocalDateTime.now());
+        existingEvaluationCriteria.setUpdatedAt(LocalDateTime.now().withNano(0));
         return evaluationCriteriaRepository.save(existingEvaluationCriteria);
     }
 

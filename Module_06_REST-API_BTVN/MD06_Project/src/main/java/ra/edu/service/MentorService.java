@@ -11,7 +11,9 @@ public interface MentorService {
 
     Page<MentorDetailsResponse> getAllMentorsDetails(int page, int size);
 
-    MentorDetailsResponse findById(Long id);
+    MentorDetailsResponse findDetailsById(Long id);
+
+    Mentor findById(Long id);
 
     Mentor createMentor(MentorRequest mentorRequest);
 

@@ -69,8 +69,8 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
                 .comments(assessmentResultRequest.getComments())
                 .users(currentUser)
                 .evaluationDate(assessmentResultRequest.getEvaluationDate())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return assessmentResultRepository.save(assessmentResult);
     }
@@ -100,7 +100,7 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
         existingAssessmentResult.setScore(assessmentResultRequest.getScore());
         existingAssessmentResult.setComments(assessmentResultRequest.getComments());
         existingAssessmentResult.setEvaluationDate(assessmentResultRequest.getEvaluationDate());
-        existingAssessmentResult.setUpdatedAt(LocalDateTime.now());
+        existingAssessmentResult.setUpdatedAt(LocalDateTime.now().withNano(0));
         return assessmentResultRepository.save(existingAssessmentResult);
     }
 }

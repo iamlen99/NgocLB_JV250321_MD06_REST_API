@@ -14,7 +14,7 @@ public interface InternshipAssignmentRepository extends JpaRepository<Internship
 
     Page<InternshipAssignment> findAllByStudentStudentId(Long studentStudentId, Pageable pageable);
 
-    Optional<InternshipAssignment> findByIdAndMentorMentorId(Long id, Long mentorMentorId);
+    Optional<InternshipAssignment> findByAssignmentIdAndMentorMentorId(Long assignmentId, Long mentorMentorId);
 
-    Optional<InternshipAssignment> findByIdAndStudentStudentId(Long id, Long studentStudentId);
+    Optional<InternshipAssignment> findByAssignmentIdAndStudentStudentId(Long assignmentId, Long studentStudentId);
 }

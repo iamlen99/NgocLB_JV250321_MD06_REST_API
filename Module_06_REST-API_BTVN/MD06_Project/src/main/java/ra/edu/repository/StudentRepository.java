@@ -1,6 +1,5 @@
 package ra.edu.repository;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,8 +9,6 @@ import ra.edu.model.entity.Student;
 import ra.edu.model.response.StudentResponse;
 import ra.edu.model.response.StudentsDetailsResponse;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -22,34 +19,41 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student findByStudentCode(String studentCode);
 
     @Query("""
-            select u.student.studentId, u.fullName, u.email, u.phone, u.student.studentCode, u.student.major,
-            u.student.studentClass, u.student.dateOfBirth, u.student.address, u.student.createdAt, u.student.updatedAt
+            select new ra.edu.model.response.StudentResponse(
+                    u.student.studentId, u.fullName, u.student.studentCode, u.student.major,
+                    u.student.studentClass, u.student.dateOfBirth, u.student.address
+                        )
             from Users u
             """)
     Page<StudentResponse> findAllMentor(Pageable pageable);
 
     @Query("""
-            select u.student.studentId, u.fullName, u.student.studentCode, u.student.major, u.student.studentClass,
-            u.student.dateOfBirth, u.student.address
-            from Users u
-            where u.mentor.mentorId = :userId
+                select new ra.edu.model.response.StudentResponse(
+                    u.student.studentId, u.fullName, u.student.studentCode, u.student.major,
+                    u.student.studentClass, u.student.dateOfBirth, u.student.address
+                )
+                from Users u
+                where u.mentor.mentorId = :userId
             """)
     Page<StudentResponse> findAllByMentorId(Long userId, Pageable pageable);
 
     @Query("""
-           select u.student.studentId, u.fullName, u.student.studentCode, u.student.major, u.student.studentClass,
-           u.student.dateOfBirth, u.student.address
-           from Users u
-           where u.student.studentId = :studentId
-           """)
+                select new ra.edu.model.response.StudentsDetailsResponse(u.student.studentId, u.fullName, u.email, u.phone,
+                u.student.studentCode, u.student.major, u.student.studentClass, u.student.dateOfBirth, u.student.address,
+                u.student.createdAt, u.student.updatedAt)
+                from Users u
+                where u.student.studentId = :studentId
+            """)
     Optional<StudentsDetailsResponse> findByStudentId(Long studentId);
 
     @Query("""
-           select u.student.studentId, u.fullName, u.student.studentCode, u.student.major, u.student.studentClass,
-           u.student.dateOfBirth, u.student.address
-           from Users u
-           where u.student.studentId = :studentId
-           and u.mentor.mentorId = :mentorId
-           """)
+                select new ra.edu.model.response.StudentsDetailsResponse(u.student.studentId, u.fullName, u.email, u.phone,
+                u.student.studentCode, u.student.major, u.student.studentClass, u.student.dateOfBirth, u.student.address,
+                u.student.createdAt, u.student.updatedAt)
+                from Users u
+                where u.student.studentId = :studentId
+                and u.mentor.mentorId = :mentorId
+            """)
     Optional<StudentsDetailsResponse> findByStudentIdAndMentorId(Long studentId, Long mentorId);
+
 }

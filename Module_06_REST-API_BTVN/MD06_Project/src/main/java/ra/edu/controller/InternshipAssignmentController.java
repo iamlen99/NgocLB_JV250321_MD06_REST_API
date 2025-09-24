@@ -22,9 +22,9 @@ public class InternshipAssignmentController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        Page<InternshipAssignment> evaluationCriterion = internshipAssignmentService.getAllInternshipAssignment(page, size);
+        Page<InternshipAssignment> internshipAssignment = internshipAssignmentService.getAllInternshipAssignment(page, size);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ApiDataResponse.success(evaluationCriterion, "Lấy danh sách phân công thực tập thành công"));
+                .body(ApiDataResponse.success(internshipAssignment, "Lấy danh sách phân công thực tập thành công"));
     }
 
     @GetMapping("/{id}")

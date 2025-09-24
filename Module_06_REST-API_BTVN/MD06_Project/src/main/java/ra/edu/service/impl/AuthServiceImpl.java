@@ -64,7 +64,8 @@ public class AuthServiceImpl implements AuthService {
                 .phone(userRegister.getPhone())
                 .isActive(true)
                 .roles(Set.of(role))
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return userRepository.save(users);
     }
@@ -96,8 +97,6 @@ public class AuthServiceImpl implements AuthService {
                 .phone(userPrincipal.getPhone())
                 .roles(userPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet()))
                 .isActive(true)
-                .createdAt(userPrincipal.getCreatedAt())
-                .updatedAt(userPrincipal.getUpdatedAt())
                 .token(generatedToken)
                 .typeAuthentication("Bearer")
                 .build();

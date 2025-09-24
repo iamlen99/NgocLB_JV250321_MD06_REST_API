@@ -28,7 +28,6 @@ public class RoundCriteriaController {
 
     @GetMapping
     public ResponseEntity<ApiDataResponse<Page<RoundCriteria>>> getAllRoundCriterias(
-            @RequestParam Long phaseId,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {

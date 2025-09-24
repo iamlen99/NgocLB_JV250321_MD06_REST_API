@@ -12,7 +12,7 @@ import ra.edu.model.response.ApiDataResponse;
 import ra.edu.service.AssessmentResultService;
 
 @RestController
-@RequestMapping("/api/v1/assessment_result")
+@RequestMapping("/api/v1/assessment_results")
 @RequiredArgsConstructor
 public class AssessmentResultController {
     private final AssessmentResultService assessmentResultService;
@@ -22,9 +22,9 @@ public class AssessmentResultController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        Page<AssessmentResult> evaluationCriterion = assessmentResultService.getAllAssessmentResult(page, size);
+        Page<AssessmentResult> assessmentResult = assessmentResultService.getAllAssessmentResult(page, size);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ApiDataResponse.success(evaluationCriterion, "Lấy danh sách kết quả đánh giá chi tiết thành công"));
+                .body(ApiDataResponse.success(assessmentResult, "Lấy danh sách kết quả đánh giá chi tiết thành công"));
     }
 
     @PostMapping

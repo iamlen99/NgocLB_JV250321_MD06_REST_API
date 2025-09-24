@@ -18,7 +18,7 @@ public class ApiDataResponse<T> {
     private String message;
     private T data;
     private List<String> errors;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
 
     public static <T> ApiDataResponse<T> error(String message) {

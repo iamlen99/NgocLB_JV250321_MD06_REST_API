@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         return switch (role) {
             case "STUDENT", "MENTOR", "ADMIN" ->
                     userRepository.findAllByRolesRoleName(RoleName.valueOf(role), pageable);
-            default -> throw new NoSuchElementException("Không tìm thấy role" + role);
+            default -> throw new NoSuchElementException("Không tìm thấy role " + role);
         };
     }
 
@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
                 .phone(userRegister.getPhone())
                 .isActive(true)
                 .roles(roleMapper.mapToSetRole(userRegister.getRoles()))
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().withNano(0))
+                .updatedAt(LocalDateTime.now().withNano(0))
                 .build();
         return userRepository.save(users);
     }
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setFullName(userUpdate.getFullName());
         existingUser.setEmail(userUpdate.getEmail());
         existingUser.setPhone(userUpdate.getPhone());
-        existingUser.setUpdatedAt(LocalDateTime.now());
+        existingUser.setUpdatedAt(LocalDateTime.now().withNano(0));
         return userRepository.save(existingUser);
     }
 

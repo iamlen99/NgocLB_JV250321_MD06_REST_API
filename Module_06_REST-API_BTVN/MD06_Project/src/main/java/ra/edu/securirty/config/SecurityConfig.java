@@ -36,12 +36,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/me").hasAnyRole("ADMIN", "STUDENT", "MENTOR")
                                 .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
                                 // student
                                 .requestMatchers(HttpMethod.GET, "/api/v1/students").hasAnyRole("ADMIN", "MENTOR")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/students/**").hasAnyRole("ADMIN", "STUDENT", "MENTOR")
-                                .requestMatchers(HttpMethod.POST, "/api/v1/students*").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/v1/students").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/students/**").hasAnyRole("ADMIN", "STUDENT")
                                 //mentor
                                 .requestMatchers(HttpMethod.GET, "/api/v1/mentors").hasAnyRole("ADMIN", "STUDENT")
@@ -74,8 +76,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/internship_assignments/**").hasRole("ADMIN")
                                 //assessment results
                                 .requestMatchers(HttpMethod.GET, "/api/v1/assessment_results").hasAnyRole("ADMIN", "STUDENT", "MENTOR")
-                                .requestMatchers(HttpMethod.POST, "/api/v1/assessment_results").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/api/v1/assessment_results/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/v1/assessment_results").hasRole("MENTOR")
+                                .requestMatchers(HttpMethod.PUT, "/api/v1/assessment_results/**").hasRole("MENTOR")
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

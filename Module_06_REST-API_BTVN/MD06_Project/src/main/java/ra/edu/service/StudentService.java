@@ -9,7 +9,9 @@ import ra.edu.model.response.StudentsDetailsResponse;
 public interface StudentService {
     Page<StudentResponse> getAllStudent(int page, int size);
 
-    StudentsDetailsResponse findById(Long id);
+    StudentsDetailsResponse findDetailsById(Long id);
+
+    Student findById(Long id);
 
     Student createStudent(StudentRequest studentRequest);
 

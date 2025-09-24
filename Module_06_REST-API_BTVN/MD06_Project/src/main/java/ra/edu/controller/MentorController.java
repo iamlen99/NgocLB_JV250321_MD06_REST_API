@@ -43,7 +43,7 @@ public class MentorController {
     public ResponseEntity<ApiDataResponse<MentorDetailsResponse>> getMentorById(
             @PathVariable Long id
     ) {
-        MentorDetailsResponse mentor = mentorService.findById(id);
+        MentorDetailsResponse mentor = mentorService.findDetailsById(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiDataResponse.success(mentor, "Lấy thông tin giáo viên hướng dẫn thành công"));
     }

@@ -40,7 +40,7 @@ public class StudentController {
     public ResponseEntity<ApiDataResponse<StudentsDetailsResponse>> getStudentById(
             @PathVariable Long id
     ) {
-        StudentsDetailsResponse student = studentService.findById(id);
+        StudentsDetailsResponse student = studentService.findDetailsById(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiDataResponse.success(student, "Lấy thông tin sinh viên thành công"));
     }

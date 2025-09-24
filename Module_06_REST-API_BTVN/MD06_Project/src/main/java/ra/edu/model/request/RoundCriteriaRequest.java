@@ -25,6 +25,6 @@ public class RoundCriteriaRequest {
     @NotNull(message = "RoundId không được để trống")
     private Long roundId;
 
-    @NotNull(message = "Trọng số của tiêu chí trong đợt đánh giá không được để trống")
+    @NotNull(message = "criteriaId không được để trống")
     private Long criteriaId;
 }
